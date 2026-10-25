@@ -5,7 +5,7 @@
     "version": "1.2.1",
     "themeable_type": "LandingPage",
     "themeable_id": 2152237078,
-    "updated_at": "2026-10-12T04:45:44Z"
+    "updated_at": "2026-10-25T04:30:21Z"
   },
   "settings": {
     "content_for_index": [
@@ -89,7 +89,7 @@
     "two_step_border_radius": "4",
     "show_guides": true,
     "show_grid": false,
-    "css": "/* CSS Overrides go here */",
+    "css": "/* Hide initial-letter avatar circles on testimonial cards */\n.review-avatar { display: none !important; }\n.review-person { gap: 0 !important; }",
     "js": "/* Javascript code goes here */",
     "brand": {
       "primary_color": "#000000",
