@@ -409,6 +409,11 @@
 .fsr .close .wrap{display:grid;gap:56px;align-items:center;grid-template-columns:1fr}
 .fsr .close-photo{display:none}
 @media(min-width:900px){.fsr .close .wrap{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr)}.fsr .close-photo{display:block;aspect-ratio:4/5;max-width:380px;justify-self:end;width:100%}}
+
+/* Sunday bonuses */
+.fsr .hero-bonus{display:flex;align-items:center;gap:8px;margin:8px 0 0;color:var(--gold-d);font-weight:600;font-size:.95rem}
+.fsr .hero-bonus .ico{width:20px;height:20px;color:var(--gold-d)}
+.fsr .offer-bonus{margin:0 0 16px;text-align:left;font-size:.9rem}
 </style>
 
 <div class="fsr" id="fsr">
@@ -449,6 +454,7 @@
           <li><svg class="ico" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Ennea, støtte døgnet rundt</li>
         </ul>
         <p class="hero-price js-webinar">Webinarpris <b>9 997 kr</b>, kun til onsdag kl. 23.59</p>
+        <p class="hero-bonus js-bonus"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zM12 8c2-4 6-4 6-1.5S15 8 12 8z"/></svg><span>+ 2 bonuser, <span class="js-sun" data-sun="kun i dag" data-other="kun til søndag">kun til søndag</span></span></p>
         <p class="micro" style="margin-top:12px"><svg><use href="#i-lock"/></svg>Vipps · Klarna · Delbetaling tilgjengelig</p>
       </div>
       <div class="hero-photo rv">
@@ -789,9 +795,10 @@
           </ul>
         </div>
         <div class="offer-r">
-          <div class="val">Total verdi <s>25 400 kr</s></div>
+          <div class="val">Total verdi <s><span class="js-bonus">26 198 kr</span><span class="js-nobonus">25 400 kr</span></s></div>
           <small>Din investering</small>
           <div class="price" data-p3="14 990 kr">9 997 kr</div>
+          <div class="bonus js-bonus offer-bonus"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zM12 8c2-4 6-4 6-1.5S15 8 12 8z"/></svg><span><strong>2 bonuser inkludert:</strong> Minikurs i meditasjon og Morgenstrekk med Pia, <span class="js-sun" data-sun="kun i dag, til kl. 23.59" data-other="kun til søndag kl. 23.59">kun til søndag kl. 23.59</span></span></div>
           <div class="split-p">inkl. mva.<span class="js-webinar"><br>Webinarpris til onsdag kl. 23.59, deretter 14 990 kr</span></div>
           <div class="pay-btns">
             <a class="btn js-pay" data-plan="full" href="#">Betal <span data-p3="14 990 kr">9 997 kr</span> <svg><use href="#i-arrow"/></svg></a>
@@ -850,7 +857,8 @@
   var PAY       = { full:'', split:'', vipps:'', klarna:'' };   // webinar price
   var PAY_AFTER = { full:'', split:'', vipps:'', klarna:'' };   // ordinary price
   var DEADLINES = {            // Oslo local time; the page shows no dates
-    price: '2026-11-18 23:59:59'  // webinar price ends, the ordinary price takes over (no bonuses on this page)
+    bonus: '2026-11-15 23:59:59', // the two bonuses show until this moment (end of the webinar Sunday), then disappear
+    price: '2026-11-18 23:59:59'  // webinar price ends, the ordinary price takes over
   };
   // Oslo wall time helpers: deadlines are written as Norwegian local time and converted with the
   // real Oslo offset of that day, so summer/winter time changes never shift them.
@@ -867,7 +875,8 @@
   }
   var q = location.search.match(/[?&]dato=([^&]+)/);   // ?dato=2026-11-17T12:00 previews any Oslo moment
   var offset = q ? oslo(decodeURIComponent(q[1])) - Date.now() : 0;
-  var pEnd = oslo(DEADLINES.price);
+  var pEnd = oslo(DEADLINES.price), bEnd = oslo(DEADLINES.bonus);
+  function osloDay(t){ return Math.floor((t + osloOffset(t)) / 86400000); }
   var ordinary = Date.now() + offset >= pEnd;   // false: webinar price + countdown, true: ordinary price
   if (ordinary && CHECKOUT_URL_AFTER) CHECKOUT_URL = CHECKOUT_URL_AFTER;
 
@@ -953,6 +962,18 @@
     root.querySelectorAll('[data-p3]').forEach(function(el){ el.textContent = el.getAttribute('data-p3'); });
   }
   if (ordinary) showOrdinary();
+  // Bonuses: «i dag» on the bonus day, «søndag» before it, gone after the deadline. Re-checked every tick.
+  var bonusDay = null, bonusOn = null;
+  function bonusState(t){
+    var on = t < bEnd, d = osloDay(t);
+    if (on === bonusOn && d === bonusDay) return;
+    bonusOn = on; bonusDay = d;
+    var today = d === osloDay(bEnd);
+    root.querySelectorAll('.js-sun').forEach(function(el){ el.textContent = el.getAttribute(today ? 'data-sun' : 'data-other'); });
+    root.querySelectorAll('.js-bonus').forEach(function(el){ el.hidden = !on; el.style.display = on ? '' : 'none'; });
+    root.querySelectorAll('.js-nobonus').forEach(function(el){ el.hidden = on; el.style.display = on ? 'none' : ''; });
+  }
+  bonusState(Date.now() + offset);
   // Keep the countdown bar on screen: fixed once its slot scrolls out of view
   (function(){
     var bar = root.querySelector('.bar');
@@ -993,8 +1014,9 @@
   // Countdown to the end of the webinar price; the page reloads into the ordinary price when it runs out
   var el = document.getElementById('fsr-timer'), cells = el ? el.querySelectorAll('span') : [];
   (function tick(){
-    if (ordinary) return;
     var t = Date.now() + offset;
+    bonusState(t);
+    if (ordinary) return;
     if (t >= pEnd) { if (q) showOrdinary(); else location.reload(); return; }   // a preview would reload into the same moment forever
     var s = Math.floor((pEnd - t) / 1000);
     [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60].forEach(function(n, i){ if (cells[i]) cells[i].textContent = String(n).padStart(2, '0'); });
