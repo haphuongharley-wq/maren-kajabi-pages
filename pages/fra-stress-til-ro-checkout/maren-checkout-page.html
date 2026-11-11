@@ -568,7 +568,7 @@
   var big = root.querySelectorAll('.js-cd'), small = root.querySelectorAll('.js-t');
   (function tick(){
     var t = Date.now() + offset, p = phaseAt(t);
-    if (p !== phase) { if (p === 3) { location.reload(); return; } phase = p; applyPhase(p); }
+    if (p !== phase) { if (p === 3 && !q) { location.reload(); return; } phase = p; applyPhase(p); }   // a preview would reload into the same moment forever
     if (phase === 3) return;
     if (phase === 1) sunTexts(t);
     var s = Math.max(0, Math.floor(((phase === 1 ? bEnd : pEnd) - t) / 1000));
