@@ -757,9 +757,9 @@
         <div class="offer-r">
           <small>Din investering</small>
           <div class="price" data-p3="14 990 kr">9 997 kr</div>
-          <div class="split-p"><span data-p3="inkl. mva. · eller [X2] × [Y2] kr">inkl. mva. · eller [X] × [Y] kr</span><br><span class="js-webinar">Webinarpris til onsdag kl. 23.59. Deretter: 14 990 kr</span></div>
+          <div class="split-p"><span>inkl. mva.</span><span class="js-split" data-p3=" · eller [X2] × [Y2] kr"> · eller [X] × [Y] kr</span><br><span class="js-webinar">Webinarpris til onsdag kl. 23.59. Deretter: 14 990 kr</span></div>
           <a class="btn js-checkout" href="[LENKE]">Ja, jeg vil bli med <svg><use href="#i-arrow"/></svg></a>
-          <p class="micro"><svg><use href="#i-lock"/></svg>Vipps · Klarna · Faktura · Delbetaling</p>
+          <p class="micro"><svg><use href="#i-lock"/></svg>Vipps · Klarna · Delbetaling</p>
         </div>
       </div>
       <p class="serif-q center" style="margin-top:48px">«Hva koster det deg å fortsette som nå, i tid, energi, helse og nærvær?»</p>
@@ -779,7 +779,7 @@
         <details><summary>«Hva om jeg faller av underveis?»</summary><p>Det er helt normalt at motstanden kommer, det er derfor uke 11 handler om nettopp det. Du kan ta igjen når du er klar, og fellesskapet er der for å løfte deg tilbake.</p></details>
         <details><summary>«Er det egoistisk å bruke penger på meg selv?»</summary><p>Tenk over hvilken versjon av deg familien din faktisk trenger. Ikke den som holder på med nebb og klør. Men den som er genuint til stede, har overskudd å gi, og føler seg fri til å være seg selv. Å ta vare på deg selv er ikke egoistisk. Det er en forutsetning.</p></details>
         <details><summary>«Hva er forskjellen på dette og 1-til-1-coaching?»</summary><p>Du får den samme metoden og den samme Enneagram-tilnærmingen, samlet i et strukturert 12 ukers kurs, med månedlig gruppecoaching, fellesskap og Ennea i stedet for individuelle samtaler.</p></details>
-        <details><summary>«Kan jeg dele opp betalingen?»</summary><p>Ja. Du kan betale via Vipps, Klarna eller faktura. Ta gjerne kontakt hvis du vil snakke om alternativene før du bestemmer deg.</p></details>
+        <details><summary>«Kan jeg dele opp betalingen?»</summary><p>Ja. Du kan betale via Vipps eller Klarna. Ta gjerne kontakt hvis du vil snakke om alternativene før du bestemmer deg.</p></details>
       </div>
     </div>
   </section>
@@ -818,12 +818,12 @@
       .formatToParts(new Date(t)).forEach(function(p){ o[p.type] = p.value; });
     return o;
   }
-  function osloOffset(t){ var o = osloParts(t); return Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour, +o.minute, +o.second) - Math.floor(t / 1000) * 1000; }
+  function osloOffset(t){ try { var o = osloParts(t); return Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour, +o.minute, +o.second) - Math.floor(t / 1000) * 1000; } catch (e) { return 3600000; } }
   function oslo(str){   // 'YYYY-MM-DD HH:MM:SS' Oslo time -> epoch ms
     var n = str.match(/\d+/g).map(Number), g = Date.UTC(n[0], n[1] - 1, n[2], n[3] || 0, n[4] || 0, n[5] || 0);
     var t = g - osloOffset(g); return g - osloOffset(t);
   }
-  function osloDay(t){ var o = osloParts(t); return o.year + o.month + o.day; }
+  function osloDay(t){ return Math.floor((t + osloOffset(t)) / 86400000); }
   var q = location.search.match(/[?&]dato=([^&]+)/);   // ?dato=2026-11-17T12:00 previews any Oslo moment
   var offset = q ? oslo(decodeURIComponent(q[1])) - Date.now() : 0;
   var bEnd = oslo(DEADLINES.bonus), pEnd = oslo(DEADLINES.price);
@@ -834,7 +834,10 @@
   var root = document.getElementById('fsr');
   if (!root) return;
   root.classList.add('js');
-  if (CHECKOUT_URL) root.querySelectorAll('.js-checkout').forEach(function(a){ a.href = CHECKOUT_URL; });
+  root.querySelectorAll('.js-checkout').forEach(function(a){
+    if (CHECKOUT_URL) a.href = CHECKOUT_URL;
+    else a.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: lenken til betalingssiden er ikke lagt inn ennå.'); });
+  });
 
   // Reveal on scroll (content stays visible without JS)
   var rv = root.querySelectorAll('.rv');
@@ -908,14 +911,24 @@
     });
   }
   // Bonus texts say «i dag» on the deadline day and «søndag» before it, never a date.
-  var bonusToday = osloDay(Date.now() + offset) === osloDay(bEnd);
-  root.querySelectorAll('.js-sun').forEach(function(el){ el.textContent = el.getAttribute(bonusToday ? 'data-sun' : 'data-other'); });
+  var shownDay = null;
+  function sunTexts(t){   // re-run when the Oslo date changes, so «søndag» turns into «i dag» at midnight
+    var d = osloDay(t);
+    if (d === shownDay) return;
+    shownDay = d;
+    var today = d === osloDay(bEnd);
+    root.querySelectorAll('.js-sun').forEach(function(el){ el.textContent = el.getAttribute(today ? 'data-sun' : 'data-other'); });
+  }
+  sunTexts(Date.now() + offset);
   if (phase > 1) applyPhase(phase);
+  // Instalment texts still holding [X]/[Y] placeholders stay hidden
+  root.querySelectorAll('.js-split').forEach(function(el){ if (/\[/.test(el.textContent)) el.style.display = 'none'; });
   var el = document.getElementById('fsr-timer'), cells = el ? el.querySelectorAll('span') : [];
   (function tick(){
     var t = Date.now() + offset, p = phaseAt(t);
     if (p !== phase) { if (p === 3) { location.reload(); return; } phase = p; applyPhase(p); }
     if (phase === 3) return;
+    if (phase === 1) sunTexts(t);
     var s = Math.max(0, Math.floor(((phase === 1 ? bEnd : pEnd) - t) / 1000));
     var v = [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60].map(function(n){ return String(n).padStart(2, '0'); });
     v.forEach(function(x, i){ if (cells[i]) cells[i].textContent = x; });
