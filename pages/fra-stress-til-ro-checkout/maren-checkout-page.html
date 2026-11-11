@@ -257,6 +257,7 @@
 .mp .sticky .btn{min-height:50px;padding:12px 20px;font-size:.95rem}
 @media(max-width:979px){.mp .sticky.on{display:flex}}
 @media(max-width:520px){.mp .visual{padding-right:28px}.mp .cmp{grid-template-columns:1fr}}
+.mp .bar.pinned{position:fixed;top:0;left:0;right:0}
 </style>
 
 <div class="mp" id="mp">
@@ -489,12 +490,31 @@
   function phaseAt(t){ return t < bEnd ? 1 : t < pEnd ? 2 : 3; }   // 1 bonuses + webinar price, 2 webinar price, 3 ordinary price
   var phase = phaseAt(Date.now() + offset);
   if (phase === 3) OFFER.options = OFFER.after;
+  // ?plan=full or ?plan=split (from the sales page buttons) preselects that option
+  var pl = location.search.match(/[?&]plan=(full|split)/);
+  if (pl) OFFER.selected = pl[1];
   // Placeholder instalment prices are never preselected
   if (OFFER.options.some(function(o){ return o.id === OFFER.selected && /\[/.test(o.price); })) OFFER.selected = 'full';
 
   var root = document.getElementById('mp');
   if (!root) return;
   root.classList.add('js');
+  // Keep the countdown bar on screen: fixed once its slot scrolls out of view
+  (function(){
+    var bar = document.getElementById('mp-bar');
+    if (!bar) return;
+    var slot = document.createElement('div');
+    bar.parentNode.insertBefore(slot, bar);
+    slot.appendChild(bar);
+    function check(){
+      var off = slot.getBoundingClientRect().top < 0;
+      if (off === bar.classList.contains('pinned')) return;
+      slot.style.height = off ? bar.offsetHeight + 'px' : '';
+      bar.classList.toggle('pinned', off);
+    }
+    window.addEventListener('scroll', check, {passive:true});   // one rect read per scroll event, no rAF so it never stalls
+    check();
+  })();
   function hide(sel){ root.querySelectorAll(sel).forEach(function(el){ el.hidden = true; el.style.display = 'none'; }); }
   function applyPhase(p){
     if (p >= 2) hide('.js-bonus,#bonus,.is-bonus');
