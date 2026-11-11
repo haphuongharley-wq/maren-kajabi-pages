@@ -315,7 +315,7 @@
         </ul>
         <div class="qa">
           <details><summary>Når kan jeg starte?</summary><p>Med en gang. Du får tilgang rett etter betaling, og går i ditt eget tempo.</p></details>
-          <details><summary>Kan jeg dele opp betalingen?</summary><p>Ja. Velg delbetaling over, eller betal med Vipps eller Klarna.</p></details>
+          <details><summary>Kan jeg dele opp betalingen?</summary><p>Ja. Velg delbetaling over, så fordeler du beløpet på 3 månedlige betalinger. Du kan også betale med Vipps eller Klarna.</p></details>
           <details><summary>Får jeg personlig oppfølging?</summary><p>Ja, i den månedlige gruppecoachingen på Zoom, der du kan stille meg spørsmål direkte. Mellom samlingene har du fellesskapet og Ennea.</p></details>
         </div>
         <p class="ask">Andre spørsmål? <a href="https://m.me/maren.kvalvaag">Send meg en melding på Messenger →</a></p>
@@ -388,7 +388,7 @@
         <div class="tot">
           <div class="tl"><span>Total verdi</span><s data-p2="25 400 kr">26 198 kr</s></div>
           <div class="tl ref js-webinar"><span>Pris fra torsdag</span><span>14 990 kr</span></div>
-          <div class="tl now"><span>Din pris i dag</span><b data-p3="14 990 kr">9 997 kr</b><small class="js-split" data-p3="eller [X2] × [Y2] kr">eller [X] × [Y] kr</small></div>
+          <div class="tl now"><span>Din pris i dag</span><b data-p3="14 990 kr">9 997 kr</b><small class="js-split" data-p3="eller 3 × 5 247 kr (totalt 15 741 kr)">eller 3 × 3 497 kr (totalt 10 491 kr)</small></div>
         </div>
         <a class="btn pay-main" href="#betal">Ja, jeg vil starte reisen min <svg><use href="#m-arrow"/></svg></a>
         <p class="rnote js-webinar"><span class="pulse" aria-hidden="true"></span><span data-p2="Webinarprisen gjelder til onsdag kl. 23.59."><span class="js-sun" data-sun="Bonusene gjelder bare ut dagen i dag." data-other="Bonusene gjelder bare til søndag kl. 23.59.">Bonusene gjelder bare til søndag kl. 23.59.</span></span></p>
@@ -452,12 +452,12 @@
   var OFFER = {
     // Webinar price, until priceDeadline
     options: [
-      { id:'split', label:'Delbetaling',  price:'[Y] kr',    per:'per måned',    note:'[X] betalinger · totalt [TOTAL] kr', tag:'Mest populær', url:'' },
+      { id:'split', label:'Delbetaling',  price:'3 497 kr',  per:'per måned',    note:'3 betalinger · totalt 10 491 kr',     tag:'Del opp på 3 måneder', url:'' },
       { id:'full',  label:'Betal alt nå', price:'9 997 kr',  per:'engangsbeløp', note:'Inkl. mva.',                          tag:'Best verdi',   url:'' }
     ],
     // Regular price, after priceDeadline (separate Kajabi offers)
     after: [
-      { id:'split', label:'Delbetaling',  price:'[Y2] kr',   per:'per måned',    note:'[X2] betalinger · totalt [TOTAL2] kr', tag:'Mest populær', url:'' },
+      { id:'split', label:'Delbetaling',  price:'5 247 kr',  per:'per måned',    note:'3 betalinger · totalt 15 741 kr',     tag:'Del opp på 3 måneder', url:'' },
       { id:'full',  label:'Betal alt nå', price:'14 990 kr', per:'engangsbeløp', note:'Inkl. mva.',                            tag:'Best verdi',   url:'' }
     ],
     selected: 'split',
