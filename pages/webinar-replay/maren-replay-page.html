@@ -1,9 +1,9 @@
 <!--
   Webinar replay · Fra stress til ro
   Paste into ONE Kajabi "Custom Code" section (full-width page). Styles are scoped under .fsr.
-  Fill before publishing: VIDEO_SRC, SALES_URL, CHECKOUT_URL / CHECKOUT_URL_AFTER and PAY / PAY_AFTER in the script.
-  The replay and the webinar price stay open until DEADLINES.price (Oslo time); after that the video is replaced
-  by a closed message and the offer shows the ordinary price. Preview any moment with ?dato=2026-11-17T12:00
+  Fill before publishing: VIDEO_SRC, SALES_URL and CHECKOUT_URL in the script.
+  Until DEADLINES.bonus the two bonuses show and the buy buttons go to the checkout; after it they go to the sales page.
+  The replay and the webinar price stay open until DEADLINES.price; then the video is replaced by a closed message. Preview any moment with ?dato=2026-11-17T12:00
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -423,6 +423,7 @@
 .fsr .rp-notes b{flex:none;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font:700 1rem 'Cormorant Garamond',serif}
 .fsr .rp-notes span{color:var(--ink);font-size:.98rem}
 .fsr .rp-cta{display:flex;justify-content:center;margin-top:28px}
+.fsr .rp-bonus{max-width:960px;margin:20px auto 0;text-align:left}
 @media(min-width:840px){.fsr .rp-notes{grid-template-columns:repeat(3,minmax(0,1fr));padding:0}}
 </style>
 
@@ -436,14 +437,6 @@
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
   </svg>
-
-  <div class="bar js-webinar" role="region" aria-label="Tilbud">
-    <div class="wrap">
-      <span>Opptaket og webinarprisen er tilgjengelig i</span>
-      <span class="t" id="fsr-timer" aria-live="off"><span>--</span><span>--</span><span>--</span><span>--</span></span>
-      <a href="#tilbud">Se tilbudet →</a>
-    </div>
-  </div>
 
   <!-- Replay -->
   <section class="rp-hero">
@@ -462,6 +455,7 @@
         <li><b>2</b><span>Når jeg går gjennom de ni mønstrene. Hvilket kjenner du deg igjen i?</span></li>
         <li><b>3</b><span>Helt til slutt, når jeg forteller om Fra stress til ro.</span></li>
       </ul>
+      <div class="bonus js-bonus rp-bonus"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zM12 8c2-4 6-4 6-1.5S15 8 12 8z"/></svg><span><strong>2 bonuser:</strong> Minikurs i meditasjon og Morgenstrekk med Pia, <span class="js-sun" data-sun="kun i dag, til kl. 23.59" data-other="kun til søndag kl. 23.59">kun til søndag kl. 23.59</span></span></div>
       <div class="rp-cta"><a class="btn" href="#tilbud">Se tilbudet <svg><use href="#i-arrow"/></svg></a></div>
     </div>
   </section>
@@ -493,9 +487,10 @@
           </ul>
         </div>
         <div class="offer-r">
-          <div class="val">Total verdi <s>25 400 kr</s></div>
+          <div class="val">Total verdi <s><span class="js-bonus">26 198 kr</span><span class="js-nobonus">25 400 kr</span></s></div>
           <small>Din investering</small>
           <div class="price" data-p3="14 990 kr">9 997 kr</div>
+          <div class="bonus js-bonus" style="margin:0 0 16px;text-align:left"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zM12 8c2-4 6-4 6-1.5S15 8 12 8z"/></svg><span><strong>Inkludert:</strong> 2 bonuser, <span class="js-sun" data-sun="kun i dag" data-other="kun til søndag">kun til søndag</span></span></div>
           <div class="split-p">inkl. mva.<span class="js-webinar"><br>Webinarpris til onsdag kl. 23.59, deretter 14 990 kr</span></div>
           <div class="pay-btns">
             <a class="btn js-pay" data-plan="full" href="#">Betal <span data-p3="14 990 kr">9 997 kr</span> <svg><use href="#i-arrow"/></svg></a>
@@ -523,7 +518,6 @@
     </div>
   </section>
 
-  <div class="sbar" id="fsr-sbar"><span class="sp"><b data-p3="14 990 kr">9 997 kr</b><small class="js-webinar">Webinarpris til onsdag</small></span><a class="btn js-checkout" href="[LENKE]">Bli med <svg><use href="#i-arrow"/></svg></a></div>
 </div>
 
 <script>
@@ -531,12 +525,10 @@
   // ---- Fill these before publishing ----
   var VIDEO_SRC = '';               // embed URL, e.g. 'https://fast.wistia.net/embed/iframe/xxxx'
   var SALES_URL = '';               // the sales page, shown after the replay closes
-  var CHECKOUT_URL = '';            // the checkout page; full/split buttons add ?plan=
-  var CHECKOUT_URL_AFTER = '';      // checkout for the ordinary price, used after DEADLINES.price
-  var PAY       = { full:'', split:'', vipps:'', klarna:'' };   // webinar price (optional direct links)
-  var PAY_AFTER = { full:'', split:'', vipps:'', klarna:'' };   // ordinary price
-  var DEADLINES = {
-    price: '2026-11-18 23:59:59'    // replay and webinar price end (Oslo time)
+  var CHECKOUT_URL = '';            // the checkout page (with the bonuses); full/split buttons add ?plan=
+  var DEADLINES = {                 // Oslo time; the page shows no dates
+    bonus: '2026-11-15 23:59:59',   // until then: bonuses shown, buy buttons go to the checkout; after: to the sales page
+    price: '2026-11-18 23:59:59'    // replay and webinar price end
   };
   // Oslo wall time helpers: deadlines are written as Norwegian local time and converted with the
   // real Oslo offset of that day, so summer/winter time changes never shift them.
@@ -553,30 +545,15 @@
   }
   var q = location.search.match(/[?&]dato=([^&]+)/);   // ?dato=2026-11-17T12:00 previews any Oslo moment
   var offset = q ? oslo(decodeURIComponent(q[1])) - Date.now() : 0;
-  var pEnd = oslo(DEADLINES.price);
-  var ordinary = Date.now() + offset >= pEnd;
-  if (ordinary && CHECKOUT_URL_AFTER) CHECKOUT_URL = CHECKOUT_URL_AFTER;
+  var bEnd = oslo(DEADLINES.bonus), pEnd = oslo(DEADLINES.price);
+  function osloDay(t){ return Math.floor((t + osloOffset(t)) / 86400000); }
+  function stateAt(t){ return t < bEnd ? 'bonus' : t < pEnd ? 'webinar' : 'ordinary'; }
+  var now = Date.now() + offset, state = stateAt(now), ordinary = state === 'ordinary';
 
   var root = document.getElementById('fsr');
   if (!root) return;
   root.classList.add('js');
 
-  // Keep the countdown bar on screen: fixed once its slot scrolls out of view
-  (function(){
-    var bar = root.querySelector('.bar');
-    if (!bar) return;
-    var slot = document.createElement('div');
-    bar.parentNode.insertBefore(slot, bar);
-    slot.appendChild(bar);
-    function check(){
-      var off = slot.getBoundingClientRect().top < 0;
-      if (off === bar.classList.contains('pinned')) return;
-      slot.style.height = off ? bar.offsetHeight + 'px' : '';
-      bar.classList.toggle('pinned', off);
-    }
-    window.addEventListener('scroll', check, {passive:true});   // one rect read per scroll event, no rAF so it never stalls
-    check();
-  })();
   // Video
   if (VIDEO_SRC) document.getElementById('rp-video').innerHTML = '<iframe src="' + VIDEO_SRC + '" title="Opptak av webinaret" allow="autoplay; fullscreen" allowfullscreen></iframe>';
   root.querySelectorAll('.js-sales').forEach(function(a){
@@ -584,13 +561,18 @@
     else a.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: lenken til salgssiden er ikke lagt inn ennå.'); });
   });
 
-  var links = ordinary ? PAY_AFTER : PAY;
+  // Buy buttons: to the checkout while the bonuses run, to the sales page after
+  function preview(e){ e.preventDefault(); alert('Forhåndsvisning: lenken er ikke lagt inn ennå.'); }
   root.querySelectorAll('.js-pay').forEach(function(a){
-    var plan = a.getAttribute('data-plan');
-    var url = links[plan] || ((plan === 'full' || plan === 'split') && CHECKOUT_URL ? CHECKOUT_URL + (CHECKOUT_URL.indexOf('?') < 0 ? '?' : '&') + 'plan=' + plan : '');
-    if (url) a.href = url;
-    else a.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: betalingslenken er ikke lagt inn ennå.'); });
+    var plan = a.getAttribute('data-plan') === 'split' ? 'split' : 'full', url;
+    if (state === 'bonus') url = CHECKOUT_URL ? CHECKOUT_URL + (CHECKOUT_URL.indexOf('?') < 0 ? '?' : '&') + 'plan=' + plan : '';
+    else url = SALES_URL ? SALES_URL + '#tilbud' : '';
+    if (url) a.href = url; else a.addEventListener('click', preview);
   });
+  // Bonus texts: «i dag» on the bonus day, «søndag» before it; all bonus elements hidden after the deadline
+  var today = osloDay(now) === osloDay(bEnd);
+  root.querySelectorAll('.js-sun').forEach(function(el){ el.textContent = el.getAttribute(today ? 'data-sun' : 'data-other'); });
+  root.querySelectorAll(state === 'bonus' ? '.js-nobonus' : '.js-bonus').forEach(function(el){ el.hidden = true; el.style.display = 'none'; });
 
   // Reveal on scroll (content stays visible without JS)
   var rv = root.querySelectorAll('.rv');
@@ -599,31 +581,13 @@
     rv.forEach(function(el){ io.observe(el); });
   } else rv.forEach(function(el){ el.classList.add('in'); });
 
-  // Sticky price bar on mobile: after the hero, hidden while the offer card is on screen
-  var sbar = document.getElementById('fsr-sbar'), hero = root.querySelector('.rp-hero'), offer = document.getElementById('tilbud');
-  if (sbar && hero && offer && 'IntersectionObserver' in window) {
-    var seen = {hero: true, offer: false};
-    var so = new IntersectionObserver(function(es){
-      es.forEach(function(e){ seen[e.target === hero ? 'hero' : 'offer'] = e.isIntersecting; });
-      sbar.classList.toggle('on', !seen.hero && !seen.offer);
-    });
-    so.observe(hero); so.observe(offer);
-  }
   function showOrdinary(){
     root.querySelectorAll('.js-webinar').forEach(function(el){ el.hidden = true; el.style.display = 'none'; });
     root.querySelectorAll('[data-p3]').forEach(function(el){ el.textContent = el.getAttribute('data-p3'); });
     document.getElementById('rp-closed').hidden = false;
   }
   if (ordinary) showOrdinary();
-  // Countdown to the end of the replay and the webinar price
-  var el = document.getElementById('fsr-timer'), cells = el ? el.querySelectorAll('span') : [];
-  (function tick(){
-    if (ordinary) return;
-    var t = Date.now() + offset;
-    if (t >= pEnd) { if (q) showOrdinary(); else location.reload(); return; }   // a preview would reload into the same moment forever
-    var s = Math.floor((pEnd - t) / 1000);
-    [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60].forEach(function(n, i){ if (cells[i]) cells[i].textContent = String(n).padStart(2, '0'); });
-    setTimeout(tick, 1000);
-  })();
+  // No countdown on this page; a quiet check reloads it when a deadline passes (a preview never reloads)
+  if (!q) setInterval(function(){ if (stateAt(Date.now()) !== state) location.reload(); }, 30000);
 })();
 </script>
