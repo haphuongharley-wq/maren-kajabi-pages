@@ -48,8 +48,9 @@
   if (!/[?&]stoppet=1/.test(location.search)) return;
   var stp = document.getElementById('stp');
   stp.classList.add('is-done');
-  // The form section is not needed after submitting
-  var fs = document.getElementById('section-stopp_form');
-  if (fs) fs.style.display = 'none';
+  // The form section is not needed after submitting. It comes after this section in the page,
+  // so wait until the whole page is parsed before hiding it.
+  function hideForm(){ var fs = document.getElementById('section-stopp_form'); if (fs) fs.style.display = 'none'; }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hideForm); else hideForm();
 })();
 </script>
