@@ -4,7 +4,7 @@
   The pay buttons link to the real checkouts (Kajabi offer checkout, Vipps, Klarna). Fill OFFER in the script.
   Phases switch by Oslo time: bonuses until Sun 15 Nov 23:59, webinar price until Wed 18 Nov 23:59, then the regular price.
   Preview any moment with ?dato=2026-11-17T12:00
-  Every [PLACEHOLDER] in the text must be replaced before publishing.
+  Payment links are filled in (Kajabi offers t7QFrxQP and ihoPo7vc, Edpay offers 11394 and 11396).
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -457,25 +457,28 @@
 
 <script>
 (function(){
-  // ---- Fill these before publishing ----
+  // ---- Payment links ----
   var OFFER = {
+    // url: Kajabi offer checkout. vipps: Edpay Vipps link for the same plan; the Vipps button follows the chosen option.
     // Webinar price, until priceDeadline
     options: [
-      { id:'split', label:'Delbetaling',  price:'3 497 kr',  per:'per måned',    note:'3 betalinger · totalt 10 491 kr',     tag:'Del opp på 3 måneder', url:'' },
-      { id:'full',  label:'Betal alt nå', price:'9 997 kr',  per:'engangsbeløp', note:'Spar 494 kr mot delbetaling',                          tag:'Best verdi',   url:'' }
+      { id:'split', label:'Delbetaling',  price:'3 497 kr',  per:'per måned',    note:'3 betalinger · totalt 10 491 kr', tag:'Del opp på 3 måneder',
+        url:'https://www.detlillepusterommet.no/offers/ihoPo7vc/checkout', vipps:'https://app.edpay.no/offer/119/11396/vipps-mobilepay' },
+      { id:'full',  label:'Betal alt nå', price:'9 997 kr',  per:'engangsbeløp', note:'Spar 494 kr mot delbetaling',     tag:'Best verdi',
+        url:'https://www.detlillepusterommet.no/offers/t7QFrxQP/checkout', vipps:'https://app.edpay.no/offer/119/11394/vipps-mobilepay' }
     ],
-    // Regular price, after priceDeadline (separate Kajabi offers)
+    // Regular price, after priceDeadline. There are no separate offers yet, so these are the same links:
+    // the offers in Kajabi and Edpay must be repriced to 14 990 kr / 3 × 5 247 kr on Thu 19 Nov.
     after: [
-      { id:'split', label:'Delbetaling',  price:'5 247 kr',  per:'per måned',    note:'3 betalinger · totalt 15 741 kr',     tag:'Del opp på 3 måneder', url:'' },
-      { id:'full',  label:'Betal alt nå', price:'14 990 kr', per:'engangsbeløp', note:'Spar 751 kr mot delbetaling',                            tag:'Best verdi',   url:'' }
+      { id:'split', label:'Delbetaling',  price:'5 247 kr',  per:'per måned',    note:'3 betalinger · totalt 15 741 kr', tag:'Del opp på 3 måneder',
+        url:'https://www.detlillepusterommet.no/offers/ihoPo7vc/checkout', vipps:'https://app.edpay.no/offer/119/11396/vipps-mobilepay' },
+      { id:'full',  label:'Betal alt nå', price:'14 990 kr', per:'engangsbeløp', note:'Spar 751 kr mot delbetaling',     tag:'Best verdi',
+        url:'https://www.detlillepusterommet.no/offers/t7QFrxQP/checkout', vipps:'https://app.edpay.no/offer/119/11394/vipps-mobilepay' }
     ],
     selected: 'split',
-    // Edpay links are per offer, so each price needs its own Vipps and Klarna link.
-    // The Vipps button and the Klarna box always show; an empty link shows a preview alert.
-    vipps:       '',   // Vipps, webinar price (Edpay offer link ending in /vipps-mobilepay)
-    klarna:      '',   // Klarna, webinar price (Edpay offer link ending in /stripe-klarna)
-    vippsAfter:  '',   // Vipps, ordinary price from Thursday
-    klarnaAfter: ''    // Klarna, ordinary price from Thursday
+    // Klarna (Edpay, one payment; the buyer can pay later or split inside Klarna). The Klarna box always shows.
+    klarna:      'https://app.edpay.no/offer/119/11394/stripe-klarna',
+    klarnaAfter: 'https://app.edpay.no/offer/119/11394/stripe-klarna'   // same offer, see the note above
   };
 
   var DEADLINES = {            // Oslo local time; the page shows no dates
@@ -501,7 +504,7 @@
   var bEnd = oslo(DEADLINES.bonus), pEnd = oslo(DEADLINES.price);
   function phaseAt(t){ return t < bEnd ? 1 : t < pEnd ? 2 : 3; }   // 1 bonuses + webinar price, 2 webinar price, 3 ordinary price
   var phase = phaseAt(Date.now() + offset);
-  if (phase === 3) { OFFER.options = OFFER.after; OFFER.vipps = OFFER.vippsAfter; OFFER.klarna = OFFER.klarnaAfter; }
+  if (phase === 3) { OFFER.options = OFFER.after; OFFER.klarna = OFFER.klarnaAfter; }
   // ?plan=full or ?plan=split (from the sales page buttons) preselects that option
   var pl = location.search.match(/[?&]plan=(full|split)/);
   if (pl) OFFER.selected = pl[1];
@@ -568,14 +571,14 @@
   function sync(){
     var id = (box.querySelector('input:checked') || {}).value, o = OFFER.options.filter(function(x){ return x.id === id; })[0] || OFFER.options[0];
     pay.href = spPay.href = o.url || '#';
+    vipps.href = o.vipps || '#';
+    vipps.textContent = 'Betal med Vipps: ' + (o.id === 'split' ? '3 × ' + o.price : o.price);
     document.getElementById('mp-sp-price').textContent = o.price + (o.id === 'split' ? '/mnd' : '');
     document.getElementById('mp-sp-label').textContent = o.label;
   }
+  var vipps = document.getElementById('mp-vipps');
   box.addEventListener('change', sync); sync();
-  [pay, spPay].forEach(function(a){ a.addEventListener('click', function(e){ if (a.getAttribute('href') === '#'){ e.preventDefault(); alert('Forhåndsvisning: betalingslenken er ikke lagt inn ennå.'); } }); });
-  var v = document.getElementById('mp-vipps');
-  if (OFFER.vipps) v.href = OFFER.vipps;
-  else v.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: Vipps-lenken er ikke lagt inn ennå.'); });
+  [pay, spPay, vipps].forEach(function(a){ a.addEventListener('click', function(e){ if (a.getAttribute('href') === '#'){ e.preventDefault(); alert('Forhåndsvisning: betalingslenken er ikke lagt inn ennå.'); } }); });
   var k = document.getElementById('mp-klarna');
   if (OFFER.klarna) k.href = OFFER.klarna;
   else k.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: Klarna-lenken er ikke lagt inn ennå.'); });

@@ -2,7 +2,7 @@
   Fra stress til ro – skreddersydd for deg
   Paste into ONE Kajabi "Custom Code" section (full-width page).
   All styles are scoped under .fsr so the Kajabi theme is not affected.
-  Fill before publishing: PAY and PAY_AFTER in the bottom script (Kajabi offer, Klarna and Vipps links).
+  Payment links live in PAY / PAY_AFTER in the bottom script (Kajabi offers, Edpay Vipps and Klarna).
   Webinar price until DEADLINES.price (Oslo time), then 14 990 kr. The two bonuses show until DEADLINES.bonus.
   Preview any moment with ?dato=2026-11-17T12:00
 -->
@@ -446,6 +446,8 @@
 .fsr .kbox li{margin:0 0 4px}
 .fsr .offer-r .btn.klarna{min-height:50px;font-size:1rem}
 .fsr .offer-r .btn.vipps{margin-top:10px;min-height:46px}
+.fsr .offer-r .vsplit{display:flex;align-items:center;justify-content:center;min-height:44px;color:#e6ebf4;font-size:.88rem;text-decoration:underline;text-underline-offset:3px}
+.fsr .offer-r .vsplit:hover{color:#fff}
 </style>
 
 <div class="fsr" id="fsr">
@@ -846,6 +848,7 @@
           </div>
           <div class="kbox"><p class="kbox-h"><span class="kmark">Klarna</span>Betal senere eller del opp</p><ol><li>Trykk på «Betal med Klarna».</li><li>Velg i Klarna om du vil betale senere eller dele opp.</li><li>Bekreft betalingen, så får du tilgangen på e-post.</li></ol><a class="btn klarna js-pay" data-plan="klarna" href="#">Betal med Klarna</a></div>
           <a class="btn vipps js-pay" data-plan="vipps" href="#">Betal med Vipps</a>
+          <a class="vsplit js-pay" data-plan="vippsSplit" href="#">Eller del opp med Vipps:&nbsp;<span data-p3="3 × 5 247 kr">3 × 3 497 kr</span></a>
           <p class="micro"><svg><use href="#i-lock"/></svg>Trygg betaling</p>
         </div>
       </div>
@@ -890,10 +893,18 @@
 
 <script>
 (function(){
-  // ---- Fill these before publishing ----
+  // ---- Payment links ----
   // Payment buttons in the offer card go straight to the Kajabi offer, Klarna or Vipps. Every other button on the page scrolls to the offer card.
-  var PAY       = { full:'', split:'', vipps:'', klarna:'' };   // webinar price: offer 9 997 kr, offer 3 × 3 497 kr, Vipps, Klarna
-  var PAY_AFTER = { full:'', split:'', vipps:'', klarna:'' };   // ordinary price from Thursday: offer 14 990 kr, offer 3 × 5 247 kr, Vipps, Klarna
+  var PAY = {
+    full:       'https://www.detlillepusterommet.no/offers/t7QFrxQP/checkout',   // Kajabi, pay in full
+    split:      'https://www.detlillepusterommet.no/offers/ihoPo7vc/checkout',   // Kajabi, 3 payments
+    vipps:      'https://app.edpay.no/offer/119/11394/vipps-mobilepay',   // Edpay Vipps, pay in full
+    vippsSplit: 'https://app.edpay.no/offer/119/11396/vipps-mobilepay',   // Edpay Vipps, 3 payments
+    klarna:     'https://app.edpay.no/offer/119/11394/stripe-klarna'    // Edpay Klarna (one payment; the buyer can pay later or split inside Klarna)
+  };
+  // Ordinary price from Thursday. There are no separate offers yet, so the same links are used:
+  // the offers in Kajabi and Edpay must be repriced to 14 990 kr / 3 × 5 247 kr on Thu 19 Nov.
+  var PAY_AFTER = PAY;
   var DEADLINES = {            // Oslo local time; the page shows no dates
     bonus: '2026-11-15 23:59:59', // the two bonuses show until this moment (end of the webinar Sunday), then disappear
     price: '2026-11-18 23:59:59'  // webinar price ends, the ordinary price takes over
