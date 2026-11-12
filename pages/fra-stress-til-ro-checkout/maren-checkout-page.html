@@ -470,8 +470,12 @@
       { id:'full',  label:'Betal alt nå', price:'14 990 kr', per:'engangsbeløp', note:'Spar 751 kr mot delbetaling',                            tag:'Best verdi',   url:'' }
     ],
     selected: 'split',
-    vipps:    '',   // Vipps payment link; the Vipps button always shows, empty shows a preview alert
-    klarna:   ''    // Klarna checkout link; the Klarna box always shows, empty shows a preview alert
+    // Edpay links are per offer, so each price needs its own Vipps and Klarna link.
+    // The Vipps button and the Klarna box always show; an empty link shows a preview alert.
+    vipps:       '',   // Vipps, webinar price (Edpay offer link ending in /vipps-mobilepay)
+    klarna:      '',   // Klarna, webinar price (Edpay offer link ending in /stripe-klarna)
+    vippsAfter:  '',   // Vipps, ordinary price from Thursday
+    klarnaAfter: ''    // Klarna, ordinary price from Thursday
   };
 
   var DEADLINES = {            // Oslo local time; the page shows no dates
@@ -497,7 +501,7 @@
   var bEnd = oslo(DEADLINES.bonus), pEnd = oslo(DEADLINES.price);
   function phaseAt(t){ return t < bEnd ? 1 : t < pEnd ? 2 : 3; }   // 1 bonuses + webinar price, 2 webinar price, 3 ordinary price
   var phase = phaseAt(Date.now() + offset);
-  if (phase === 3) OFFER.options = OFFER.after;
+  if (phase === 3) { OFFER.options = OFFER.after; OFFER.vipps = OFFER.vippsAfter; OFFER.klarna = OFFER.klarnaAfter; }
   // ?plan=full or ?plan=split (from the sales page buttons) preselects that option
   var pl = location.search.match(/[?&]plan=(full|split)/);
   if (pl) OFFER.selected = pl[1];
