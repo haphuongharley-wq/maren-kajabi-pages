@@ -1,8 +1,6 @@
 <!--
-  Webinar replay · Fra stress til ro
-  Paste into ONE Kajabi "Custom Code" section (full-width page). Styles are scoped under .fsr.
-  Fill before publishing: VIDEO_SRC and OFFER_URL in the script. The page has no dates, prices or countdowns;
-  the button leads to the sales page, which shows the current price and bonuses.
+  PREVIEW ONLY. Do not paste this file into Kajabi.
+  In Kajabi the page is: maren-replay-top.html, a native Kajabi Video section, maren-replay-bottom.html.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -412,18 +410,61 @@
 .fsr .hero-bonus{display:flex;align-items:center;gap:8px;margin:8px 0 0;color:var(--gold-d);font-weight:600;font-size:.95rem}
 .fsr .hero-bonus .ico{width:20px;height:20px;color:var(--gold-d)}
 .fsr .offer-bonus{margin:0 0 16px;text-align:left;font-size:.9rem}
+
+/* Offer card v2 */
+.fsr .offer-l{display:flex;flex-direction:column;gap:18px}
+.fsr .ol-h{font-size:.76rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d)}
+.fsr .offer-l .ticks{margin:0}
+.fsr .offer-l .ticks li{margin-bottom:10px}
+.fsr .bonus-list{border-top:1px dashed var(--gold);padding-top:16px!important}
+.fsr .bonus-list li{align-items:center}
+.fsr .bonus-list .ico{width:22px;height:22px;color:var(--gold-d);flex:none}
+.fsr .bonus-list em{margin-left:auto;font-style:normal;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--rose-d);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.fsr .offer-l .offer-q{margin-top:auto;padding:16px;border-radius:var(--r);background:var(--cream);text-align:left}
+.fsr .offer-l .offer-q p{color:var(--navy)}
+.fsr .offer-l .offer-q cite{color:var(--slate)}
+.fsr .offer-r .price{margin:6px 0 2px}
+.fsr .offer-r .incl{color:#c3cde0;font-size:.9rem}
+.fsr .offer-r .incl s{color:#fff;font-weight:600}
+.fsr .chips-r{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 22px}
+.fsr .chip-r{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);color:#e6ebf4;font-size:.84rem;font-weight:500}
+.fsr .chip-r .ico{width:16px;height:16px}
+.fsr .chip-r.gold{background:var(--gold-xl);color:var(--navy-d);font-weight:600}
+.fsr .chip-r.gold .ico{color:var(--gold-d)}
+.fsr .offer-r .or{margin:16px 0 8px;font-size:.8rem;color:#9fb0cc;letter-spacing:.04em}
+.fsr .offer-r .pay-row .btn{min-height:46px;font-size:.92rem;padding:10px 14px}
+.fsr .offer-r .micro{margin-top:14px}
+/* Klarna box */
+.fsr .kbox{margin:14px 0 0;padding:16px 16px 14px;border-radius:var(--r-sm);background:rgba(255,255,255,.07);border:1px solid rgba(255,179,199,.55);text-align:left}
+.fsr .kbox-h{display:flex;align-items:center;gap:10px;margin:0 0 10px;color:#fff;font-weight:600;font-size:1rem}
+.fsr .kmark{background:#ffb3c7;color:#17120f;font-weight:800;font-size:.8rem;padding:3px 9px;border-radius:6px}
+.fsr .kbox ol{margin:0 0 14px;padding-left:20px;color:#d5dcea;font-size:.9rem;line-height:1.5}
+.fsr .kbox li{margin:0 0 4px}
+.fsr .offer-r .btn.klarna{min-height:50px;font-size:1rem}
+.fsr .offer-r .btn.vipps{margin-top:10px;min-height:46px}
+.fsr .offer-r .vsplit{display:flex;align-items:center;justify-content:center;min-height:44px;color:#e6ebf4;font-size:.88rem;text-decoration:underline;text-underline-offset:3px}
+.fsr .offer-r .vsplit:hover{color:#fff}
 </style>
 <style>
-.fsr .rp-hero{padding:clamp(40px,6vw,80px) 0 clamp(40px,5vw,64px);background:radial-gradient(1000px 500px at 80% 0%,var(--gold-xl),transparent 60%),linear-gradient(180deg,var(--bg),var(--cream))}
+.fsr .rp-hero{padding:clamp(40px,6vw,80px) 0 clamp(20px,3vw,32px);background:radial-gradient(1000px 500px at 80% 0%,var(--gold-xl),transparent 60%),linear-gradient(180deg,var(--bg),var(--cream))}
 .fsr .rp-hero h1{font-size:clamp(2.1rem,5vw,3.4rem);max-width:820px;margin:0 auto .3em}
-.fsr .rp-video{position:relative;aspect-ratio:16/9;max-width:960px;margin:32px auto 0;border-radius:var(--r-lg);overflow:hidden;background:var(--navy-x);box-shadow:var(--sh)}
-.fsr .rp-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.fsr .rp-video .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#c3cde0;text-align:center;padding:24px}
-.fsr .rp-video .ph span{width:72px;height:72px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
-.fsr .rp-video .ph svg{width:28px;height:28px;fill:#fff}
+.fsr .rp-hero .lead{margin-bottom:0}
 .fsr .rp-cta{padding:clamp(40px,6vw,72px) 0;text-align:center;background:var(--bg)}
 .fsr .rp-cta .lead{margin:0 auto 22px;max-width:560px}
+.fsr-prev-video{background:#f4efe5;padding:0 16px clamp(32px,5vw,56px)}
+.fsr-prev-video div{max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:12px;background:#142340;color:#c3cde0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:500 1rem/1.5 Inter,system-ui,sans-serif}
 </style>
+
+<div class="fsr">
+  <section class="rp-hero">
+    <div class="wrap center">
+      <span class="eyebrow">Opptak av webinaret</span>
+      <h1>Hvorfor «bare hvile» <em>aldri har vært nok</em></h1>
+      <p class="lead narrow">Sett av 90 minutter, ta med en kopp te og en notatbok, og se webinaret i ditt eget tempo.</p>
+    </div>
+  </section>
+</div>
+<section class="fsr-prev-video"><div>Her ligger Kajabi-videoen. Maren bytter den ut med opptaket på søndag.</div></section>
 
 <div class="fsr" id="fsr">
 
@@ -435,16 +476,6 @@
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
   </svg>
-
-  <!-- Replay -->
-  <section class="rp-hero">
-    <div class="wrap center">
-      <span class="eyebrow">Opptak av webinaret</span>
-      <h1>Hvorfor «bare hvile» <em>aldri har vært nok</em></h1>
-      <p class="lead narrow">Sett av 90 minutter, ta med en kopp te og en notatbok, og se webinaret i ditt eget tempo.</p>
-      <div class="rp-video" id="rp-video"><div class="ph"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Videoen legges inn her</div></div>
-    </div>
-  </section>
 
   <!-- Proof strip -->
   <section class="proof" aria-label="Fra deltakerne">
@@ -460,7 +491,7 @@
   <section class="rp-cta">
     <div class="wrap">
       <p class="lead">Vil du gå veien videre sammen med meg? Her finner du alt om Fra stress til ro, og hva som er med akkurat nå.</p>
-      <a class="btn" id="rp-offer" href="#">Se tilbudet og bonusene <svg><use href="#i-arrow"/></svg></a>
+      <a class="btn" id="rp-offer" href="#">Se tilbudet <svg><use href="#i-arrow"/></svg></a>
     </div>
   </section>
 
@@ -468,14 +499,11 @@
 
 <script>
 (function(){
-  // ---- Fill these before publishing ----
-  var VIDEO_SRC = '';   // embed URL, e.g. 'https://fast.wistia.net/embed/iframe/xxxx'
+  // ---- Fill before publishing ----
   var OFFER_URL = '';   // the sales page; it shows the current price and bonuses
 
-  var root = document.getElementById('fsr');
-  if (!root) return;
-  if (VIDEO_SRC) document.getElementById('rp-video').innerHTML = '<iframe src="' + VIDEO_SRC + '" title="Opptak av webinaret" allow="autoplay; fullscreen" allowfullscreen></iframe>';
   var btn = document.getElementById('rp-offer');
+  if (!btn) return;
   if (OFFER_URL) btn.href = OFFER_URL;
   else btn.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: lenken til salgssiden er ikke lagt inn ennå.'); });
 })();
