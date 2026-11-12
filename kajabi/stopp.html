@@ -1,7 +1,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-.stp{background:#FAF9F6;color:#1f2a3d;font:17px/1.65 Inter,system-ui,sans-serif;padding:clamp(56px,10vw,120px) 18px;text-align:center}
+.stp{background:#FAF9F6;color:#1f2a3d;font:17px/1.65 Inter,system-ui,sans-serif;padding:clamp(56px,10vw,120px) 16px 24px;text-align:center}
 .stp *{box-sizing:border-box}
 .stp .card{max-width:620px;margin:0 auto;background:#fff;border:1px solid #EDE7DB;border-radius:28px;padding:clamp(28px,5vw,48px);box-shadow:0 24px 60px -24px rgba(26,45,80,.28)}
 .stp .eyebrow{display:block;font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#8a7340;margin:0 0 14px}
@@ -9,12 +9,47 @@
 .stp h1 em{font-style:italic;font-weight:500;color:#8a7340}
 .stp p{margin:0 0 14px;color:#5d6a82}
 .stp .sig{font:italic 500 1.5rem 'Cormorant Garamond',Georgia,serif;color:#8a7340;margin:22px 0 0}
+.stp .done{display:none}
+.stp.is-done .ask{display:none}
+.stp.is-done .done{display:block}
+.stp.is-done{padding-bottom:clamp(56px,10vw,120px)}
+/* Before submitting, the native form block below continues the card */
+.stp:not(.is-done){padding-bottom:0}
+.stp:not(.is-done) .card{border-bottom:0;border-radius:28px 28px 0 0;box-shadow:none;padding-bottom:8px}
+#block-stopp_form_block{max-width:620px;margin:0 auto!important;background:#fff;border:1px solid #EDE7DB;border-top:0;border-radius:0 0 28px 28px!important;padding:0 clamp(28px,5vw,48px) clamp(28px,5vw,48px)!important;font-family:Inter,system-ui,sans-serif}
+#block-stopp_form_block [data-nova-role=title],#block-stopp_form_block [data-nova-role=subtitle]{display:none}
+#block-stopp_form_block input[type=email]{min-height:52px;border-radius:12px;border-color:#EDE7DB;font-size:17px;padding:12px 16px;color:#1f2a3d}
+#block-stopp_form_block input[type=email]:focus{border-color:#AB9461;outline:3px solid rgba(171,148,97,.35);outline-offset:1px}
+#block-stopp_form_block .form-btn{width:100%;min-height:52px;border-radius:999px!important;background:#274472!important;border-color:#274472!important;color:#fff!important;font-weight:600;font-size:1rem}
+#block-stopp_form_block .form-btn:hover{background:#1a2f52!important;border-color:#1a2f52!important}
+#block-stopp_form_block .form-btn:focus-visible{outline:3px solid #AB9461;outline-offset:3px}
 </style>
-<div class="stp">
+<!--
+  Opt-out page for the sales emails. Section 1 (this code) holds the texts; section 2 is the native Kajabi form
+  «Stopp salgs-e-poster · Fra stress til ro» (2149782188). Submitting it runs automation 1507478:
+  deregister from the event and add the tag stopp-salg-fsr. The form redirects to ?stoppet=1, which shows the confirmation.
+-->
+<div class="stp" id="stp">
   <div class="card">
     <span class="eyebrow">Det lille pusterommet</span>
-    <h1>Ferdig, du får ikke flere e-poster <em>om Fra stress til ro</em></h1>
-    <p>Takk for at du sa ifra. De vanlige e-postene mine kommer som før.</p>
-    <p class="sig">Klem fra Maren</p>
+    <div class="ask">
+      <h1>Vil du ikke ha flere e-poster <em>om Fra stress til ro?</em></h1>
+      <p>Skriv inn e-postadressen din under, så stopper jeg dem. De vanlige e-postene mine kommer som før.</p>
+    </div>
+    <div class="done">
+      <h1>Ferdig, du får ikke flere e-poster <em>om Fra stress til ro</em></h1>
+      <p>Takk for at du sa ifra. De vanlige e-postene mine kommer som før.</p>
+      <p class="sig">Klem fra Maren</p>
+    </div>
   </div>
 </div>
+<script>
+(function(){
+  if (!/[?&]stoppet=1/.test(location.search)) return;
+  var stp = document.getElementById('stp');
+  stp.classList.add('is-done');
+  // The form section is not needed after submitting
+  var fs = document.getElementById('section-stopp_form');
+  if (fs) fs.style.display = 'none';
+})();
+</script>
