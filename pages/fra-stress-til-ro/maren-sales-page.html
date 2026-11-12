@@ -891,8 +891,8 @@
 <script>
 (function(){
   // ---- Fill these before publishing ----
-  var CHECKOUT_URL = '';            // e.g. 'https://www.detlillepusterommet.no/offers/xxxx/checkout'
-  var CHECKOUT_URL_AFTER = '';      // checkout for the regular price (14 990 kr), used after PRICE_DEADLINE
+  var CHECKOUT_URL = '';            // the Kajabi page holding maren-checkout-page.html; ?plan=full|split is added
+  var CHECKOUT_URL_AFTER = '';      // only if the regular price (14 990 kr) has its own checkout page; that page switches price itself, so usually empty
   // Payment buttons in the offer card. Empty full/split fall back to the checkout page with ?plan=.
   var PAY       = { full:'', split:'', vipps:'', klarna:'' };   // webinar price
   var PAY_AFTER = { full:'', split:'', vipps:'', klarna:'' };   // ordinary price
