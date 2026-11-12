@@ -2,7 +2,7 @@
   Checkout page — Fra stress til ro – skreddersydd for deg
   Paste into ONE Kajabi "Custom Code" section. Styles are scoped under .mp.
   The pay buttons link to the real checkouts (Kajabi offer checkout, Vipps, Klarna). Fill OFFER in the script.
-  Phases switch by Oslo time: bonuses until Sun 15 Nov 23:59, webinar price until Wed 18 Nov 23:59, then the regular price.
+  Weekly evergreen cycle by Oslo time (see WEEK in the script): Sunday bonuses + webinar price, Monday-Wednesday webinar price, Thursday-Saturday regular price.
   Preview any moment with ?dato=2026-11-17T12:00
   Payment links are filled in (Kajabi offers t7QFrxQP and ihoPo7vc, Edpay offers 11394 and 11396).
 -->
@@ -484,10 +484,11 @@
     klarnaAfter: 'https://app.edpay.no/offer/119/11394/stripe-klarna'   // same offer, see the note above
   };
 
-  var DEADLINES = {            // Oslo local time; the page shows no dates
-    bonus: '2026-11-15 23:59:59', // the two bonuses disappear after this (end of the webinar Sunday)
-    price: '2026-11-18 23:59:59'  // webinar price ends, the ordinary price takes over
-  };
+  // Weekly evergreen cycle in Oslo time (the webinar runs every Sunday at 10:00; the page shows no dates):
+  //   Sunday            bonuses + webinar price, bonuses end Sunday 23:59
+  //   Monday-Wednesday  webinar price, ends Wednesday 23:59
+  //   Thursday-Saturday ordinary price
+  var WEEK = { bonusDay: 0, priceDay: 3 };   // days after Sunday: bonuses end Sunday, webinar price ends Wednesday
   // Oslo wall time helpers: deadlines are written as Norwegian local time and converted with the
   // real Oslo offset of that day, so summer/winter time changes never shift them.
   function osloParts(t){
@@ -501,10 +502,15 @@
     var n = str.match(/\d+/g).map(Number), g = Date.UTC(n[0], n[1] - 1, n[2], n[3] || 0, n[4] || 0, n[5] || 0);
     var t = g - osloOffset(g); return g - osloOffset(t);
   }
+  function weekEnds(t){   // this cycle's bonus and price deadlines (epoch ms); the cycle starts Sunday 00:00 Oslo time
+    var o = osloParts(t), sun = +o.day - new Date(Date.UTC(+o.year, +o.month - 1, +o.day)).getUTCDay();
+    function end(d){ var x = new Date(Date.UTC(+o.year, +o.month - 1, sun + d)); return oslo(x.getUTCFullYear() + '-' + (x.getUTCMonth() + 1) + '-' + x.getUTCDate() + ' 23:59:59'); }
+    return { bonus: end(WEEK.bonusDay), price: end(WEEK.priceDay) };
+  }
   function osloDay(t){ return Math.floor((t + osloOffset(t)) / 86400000); }
   var q = location.search.match(/[?&]dato=([^&]+)/);   // ?dato=2026-11-17T12:00 previews any Oslo moment
   var offset = q ? oslo(decodeURIComponent(q[1])) - Date.now() : 0;
-  var bEnd = oslo(DEADLINES.bonus), pEnd = oslo(DEADLINES.price);
+  var ends = weekEnds(Date.now() + offset), bEnd = ends.bonus, pEnd = ends.price;
   function phaseAt(t){ return t < bEnd ? 1 : t < pEnd ? 2 : 3; }   // 1 bonuses + webinar price, 2 webinar price, 3 ordinary price
   var phase = phaseAt(Date.now() + offset);
   if (phase === 3) { OFFER.options = OFFER.after; OFFER.klarna = OFFER.klarnaAfter; }
