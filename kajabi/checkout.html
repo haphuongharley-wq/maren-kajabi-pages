@@ -1,0 +1,627 @@
+<!--
+  Checkout page — Fra stress til ro – skreddersydd for deg
+  Paste into ONE Kajabi "Custom Code" section. Styles are scoped under .mp.
+  The pay buttons link to the real checkouts (Kajabi offer checkout, Vipps, Klarna). Fill OFFER in the script.
+  Weekly evergreen cycle by Oslo time (see WEEK in the script): Sunday bonuses + webinar price, Monday-Wednesday webinar price, Thursday-Saturday regular price.
+  Preview any moment with ?dato=2026-11-17T12:00
+  Payment links are filled in (Kajabi offers t7QFrxQP and ihoPo7vc, Edpay offers 11394 and 11396).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+.mp{
+  --navy:#274472;--navy-d:#1a2d50;--navy-x:#142340;
+  --gold:#AB9461;--gold-d:#8a7340;--gold-l:#F2E4A6;--gold-xl:#f8f0d4;
+  --slate:#5d6a82;--bg:#FAF9F6;--cream:#f4efe5;--sand:#EDE7DB;--rose:#f4e9e4;--rose-d:#9a4b3d;
+  --ink:#1f2a3d;
+  --r-sm:12px;--r:20px;--r-lg:28px;--arch:999px 999px var(--r-lg) var(--r-lg);
+  --sh:0 24px 60px -24px rgba(26,45,80,.28);--sh-sm:0 10px 30px -14px rgba(26,45,80,.22);
+  --s-sec:clamp(64px,9vw,112px);--ease:cubic-bezier(.2,.7,.2,1);
+  font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.7;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mp *,.mp *::before,.mp *::after{box-sizing:border-box}
+.mp [hidden]{display:none!important}
+.mp img{max-width:100%;height:auto;display:block}
+.mp h1,.mp h2,.mp h3{font-family:'Cormorant Garamond',Georgia,serif;color:var(--navy);line-height:1.1;margin:0 0 .45em;font-weight:600;font-variant-numeric:lining-nums;letter-spacing:-.01em}
+.mp h1{font-size:clamp(2.4rem,6vw,4rem)}
+.mp h2{font-size:clamp(1.9rem,4.4vw,3rem)}
+.mp h3{font-size:1.4rem}
+.mp h1 em,.mp h2 em{font-style:italic;color:var(--gold-d);font-weight:500}
+.mp p{margin:0 0 1em}
+.mp a{color:inherit}
+.mp .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mp .narrow{max-width:740px;margin-left:auto;margin-right:auto}
+.mp section{padding:var(--s-sec) 0;position:relative}
+.mp .center{text-align:center}
+.mp .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:16px}
+.mp .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.mp .center .eyebrow::after{content:"";width:28px;height:1px;background:currentColor}
+.mp .lead{font-size:clamp(1.08rem,1.6vw,1.22rem);color:var(--slate);line-height:1.6}
+.mp .serif-q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.3;color:var(--navy)}
+.mp .cream{background:var(--cream)}.mp .white{background:#fff}
+.mp .dark{background:var(--navy-x);color:#dfe5f0}
+.mp .dark h2,.mp .dark h3{color:#fff}.mp .dark .eyebrow{color:var(--gold-l)}
+.mp .ico{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mp .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:16px 32px;border-radius:999px;background:var(--gold);color:#fff;font:600 1.03rem 'Inter',sans-serif;text-decoration:none;border:0;cursor:pointer;transition:background .25s var(--ease),transform .25s var(--ease);box-shadow:0 14px 30px -12px rgba(138,115,64,.7)}
+.mp .btn svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+.mp .btn:hover{background:var(--gold-d);transform:translateY(-2px)}
+.mp .btn:hover svg{transform:translateX(4px)}
+.mp .btn-ghost{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--sand)}
+.mp .btn-ghost:hover{background:var(--cream);color:var(--navy)}
+.mp a:focus-visible,.mp button:focus-visible,.mp input:focus-visible,.mp summary:focus-visible,.mp label:focus-within{outline:3px solid var(--gold);outline-offset:3px}
+.mp .arch{border-radius:var(--arch);overflow:hidden;box-shadow:var(--sh);background:var(--sand)}
+.mp .arch img,.mp .photo img{width:100%;height:100%;object-fit:cover}
+.mp .photo{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);background:var(--sand)}
+.mp .stars{display:inline-flex;gap:2px;color:var(--gold)}
+.mp .stars svg{width:16px;height:16px;fill:currentColor;stroke:none}
+.mp .q-card{break-inside:avoid;background:#fff;border-radius:var(--r);padding:24px;margin:0 0 18px;border:1px solid var(--sand)}
+.mp .q-card p{margin:10px 0 14px}
+.mp .q-card strong{color:var(--navy);background:linear-gradient(transparent 62%,var(--gold-xl) 62%)}
+.mp .q-card figcaption{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--navy)}
+.mp .q-card figcaption::before{content:"";width:22px;height:2px;background:var(--gold)}
+.mp .disc{font-size:.86rem;color:var(--slate);font-style:italic;text-align:center}
+.mp .ticks{list-style:none;padding:0;margin:14px 0}
+.mp .ticks li{display:flex;gap:12px;margin-bottom:12px}
+.mp .ticks svg{width:22px;height:22px;flex:none;color:var(--gold);margin-top:3px}
+.mp .faq{max-width:760px;margin:36px auto 0}
+.mp details{background:#fff;border:1px solid var(--sand);border-radius:16px;margin-bottom:12px}
+.mp summary{cursor:pointer;list-style:none;padding:20px 60px 20px 22px;font-weight:600;color:var(--navy);position:relative;min-height:44px}
+.mp summary::-webkit-details-marker{display:none}
+.mp summary::after{content:"";position:absolute;right:20px;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;background:var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a7340' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .25s var(--ease)}
+.mp details[open] summary::after{transform:rotate(45deg)}
+.mp details p{padding:0 22px 20px;margin:0;color:var(--slate)}
+.mp .logo{display:flex;align-items:center;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--sand)}
+.mp .logo img{width:72px;height:72px}
+@media(max-width:520px){.mp .logo{padding:6px 16px}.mp .logo img{width:56px;height:56px}}
+.mp.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.mp.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.mp *,.mp *::before,.mp *::after{animation:none!important;transition:none!important}.mp.js .rv{opacity:1;transform:none}}
+@media(max-width:520px){.mp{font-size:16px}.mp .wrap{padding:0 18px}.mp .bar{flex-wrap:nowrap;font-size:.8rem;padding:8px 12px;gap:8px}.mp .bar .bar-link,.mp .bar .pulse{display:none}.mp .bonus .go{display:none}}
+
+/* Checkout */
+
+.mp .bar{position:sticky;top:0;z-index:60;background:var(--rose-d);color:#fff;font-size:.9rem;text-align:center;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.mp .bar .t{display:inline-flex;gap:3px;font-variant-numeric:tabular-nums;align-items:center}
+.mp .bar .t span{background:rgba(0,0,0,.22);border-radius:6px;padding:1px 7px;font-weight:700}
+.mp .bar a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.mp .pulse{width:9px;height:9px;border-radius:50%;background:#fff;display:inline-block;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:mp-pulse 1.8s infinite}
+@keyframes mp-pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.mp a.bonus{text-decoration:none;transition:border-color .2s,background .2s}
+.mp a.bonus:hover{background:#f4e7c2}
+.mp .bonus .go{margin-left:auto;font-weight:600;color:var(--gold-d);white-space:nowrap}
+/* Bonus section */
+.mp .bonus-sec{background:linear-gradient(180deg,#fff,var(--gold-xl))}
+.mp .live-tag{display:inline-flex;align-items:center;gap:10px;background:var(--rose-d);color:#fff;border-radius:999px;padding:8px 16px;font-size:.82rem;font-weight:600;letter-spacing:.04em;margin-bottom:18px}
+.mp .big-cd{margin:26px 0 8px}
+.mp .cd{display:inline-flex;gap:10px}
+.mp .cd>span{min-width:76px;background:#fff;border:1px solid var(--sand);border-radius:16px;padding:12px 8px;box-shadow:var(--sh-sm);display:flex;flex-direction:column;align-items:center}
+.mp .cd b{font:700 2.2rem/1 'Cormorant Garamond',serif;color:var(--navy);font-variant-numeric:lining-nums tabular-nums}
+.mp .cd small{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-top:4px}
+.mp .dark-cd .cd>span{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);box-shadow:none}
+.mp .dark-cd .cd b{color:#fff}.mp .dark-cd .cd small{color:#c3cde0}
+.mp .bgrid{display:grid;gap:18px;grid-template-columns:minmax(0,1fr);margin:36px 0 22px}
+@media(min-width:860px){.mp .bgrid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px;margin-left:auto;margin-right:auto}}
+.mp .bcard{background:#fff;border:2px dashed var(--gold);border-radius:var(--r-lg);padding:26px 24px;display:flex;flex-direction:column}
+.mp .bcard .bn{align-self:flex-start;background:var(--gold);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.mp .bcard h3{font-size:1.45rem}
+.mp .bcard p{color:var(--slate);flex:1}
+.mp .bcard .bv{font-weight:600;color:var(--gold-d);font-size:.92rem}
+.mp .after-note{text-align:center;color:var(--rose-d);font-weight:600;margin:0 0 22px}
+/* Value stack (receipt) */
+.mp .receipt{max-width:860px;margin:36px auto 0;background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh);padding:clamp(20px,4vw,40px)}
+.mp .rows{list-style:none;margin:0;padding:0}
+.mp .rows li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--sand)}
+.mp .ri{width:44px;height:44px;border-radius:12px;background:var(--cream);color:var(--gold-d);display:flex;align-items:center;justify-content:center}
+.mp .ri svg{width:22px;height:22px}
+.mp .rt b{display:block;color:var(--navy);font-size:1.02rem}
+.mp .rt small{color:var(--slate);font-size:.88rem}
+.mp .rv2{font-weight:600;color:var(--slate);white-space:nowrap;font-size:.95rem}
+.mp .rows li.is-bonus{background:var(--gold-xl);margin:0 calc(-1*clamp(20px,4vw,40px));padding-left:clamp(20px,4vw,40px);padding-right:clamp(20px,4vw,40px);border-bottom-color:#efe1b6}
+.mp .rows li.is-bonus .ri{background:var(--gold);color:#fff}
+.mp .lb{font-style:normal;display:inline-block;background:var(--rose-d);color:#fff;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-right:8px;vertical-align:2px}
+.mp .tot{margin:22px 0 20px;display:grid;gap:8px}
+.mp .tl{display:flex;align-items:baseline;justify-content:space-between;gap:12px;color:var(--slate)}
+.mp .tl s{font-weight:600}
+.mp .tl.ref{font-size:.9rem}
+.mp .tl.now{flex-wrap:wrap;border-top:2px solid var(--navy);padding-top:14px;margin-top:6px;color:var(--navy)}
+.mp .tl.now span{font-weight:600;font-size:1.05rem}
+.mp .tl.now b{font:700 2.4rem/1 'Cormorant Garamond',serif;font-variant-numeric:lining-nums;margin-left:auto}
+.mp .tl.now small{flex-basis:100%;text-align:right;font-size:.86rem;color:var(--slate)}
+.mp .rnote{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 0;font-size:.88rem;color:var(--rose-d);font-weight:600}
+.mp .rnote .pulse{background:var(--rose-d)}
+@media(max-width:560px){.mp .rows li{grid-template-columns:auto minmax(0,1fr) auto;gap:10px;padding:12px 0}.mp .rt small{display:none}.mp .rt b{font-size:.92rem}.mp .rv2{font-size:.84rem;white-space:nowrap}.mp .cd>span{min-width:62px}.mp .cd b{font-size:1.8rem}}
+/* Final */
+.mp .final p{color:#c9d2e3}
+.mp .final .btn{margin-top:8px}
+
+/* Above the fold: pitch | payment panel */
+.mp .fold{padding:clamp(28px,4vw,48px) 0 clamp(48px,6vw,80px);background:radial-gradient(900px 480px at 10% 0%,var(--gold-xl),transparent 60%),linear-gradient(180deg,var(--bg),var(--cream))}
+.mp .fold-grid{display:grid;gap:28px;grid-template-columns:minmax(0,1fr);align-items:start;grid-template-areas:"pitch" "panel" "more" "visual"}
+.mp .pitch-more{grid-area:more}
+@media(min-width:980px){.mp .fold-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:auto auto 1fr;gap:0 48px;grid-template-areas:"pitch panel" "more panel" "visual panel"}.mp .pitch-more{margin-bottom:40px}.mp .panel{position:sticky;top:56px}}
+.mp .pitch{grid-area:pitch}.mp .panel{grid-area:panel}.mp .visual{grid-area:visual}
+.mp .pitch h1{font-size:clamp(2.2rem,4.6vw,3.4rem);margin-bottom:.3em}
+.mp .pitch .lead{margin-bottom:18px}
+.mp .outcomes{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:10px}
+.mp .outcomes li{display:flex;gap:12px;align-items:flex-start;color:var(--ink)}
+.mp .outcomes svg{width:22px;height:22px;flex:none;color:var(--gold);margin-top:2px}
+.mp .rating{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--navy);font-weight:500;flex-wrap:wrap}
+
+/* Product mockup */
+.mp .visual{position:relative;padding:8px 40px 30px 0}
+.mp .laptop{background:#1d2736;border-radius:16px 16px 6px 6px;padding:10px 10px 0;box-shadow:var(--sh)}
+.mp .laptop .scr{background:var(--bg);border-radius:8px 8px 0 0;overflow:hidden;aspect-ratio:16/10;display:grid;grid-template-columns:38% 62%}
+.mp .laptop .base{height:12px;background:#2b3648;border-radius:0 0 12px 12px;margin:0 -18px}
+.mp .scr .side{background:var(--navy);color:#dfe5f0;padding:10px 8px;font-size:.56rem;line-height:1.2;overflow:hidden;display:grid;grid-template-rows:auto repeat(12,minmax(0,1fr));align-content:stretch}
+.mp .scr .side b{display:block;color:var(--gold-l);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.mp .scr .side div{align-self:center;min-width:0;padding:2px 6px;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp .scr .side div.on{background:rgba(242,228,166,.16);color:#fff}
+.mp .scr .main{padding:14px;display:flex;flex-direction:column;gap:8px}
+.mp .scr .vid{flex:1;border-radius:8px;background:linear-gradient(135deg,#3a5384,#1a2d50);display:flex;align-items:center;justify-content:center}
+.mp .scr .vid span{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.mp .scr .vid svg{width:12px;height:12px;fill:#fff;margin-left:2px}
+.mp .scr .ttl{font:600 .85rem 'Cormorant Garamond',serif;color:var(--navy)}
+.mp .scr .prog{height:6px;border-radius:999px;background:var(--sand);overflow:hidden}
+.mp .scr .prog i{display:block;width:42%;height:100%;background:var(--gold)}
+.mp .phone{position:absolute;right:0;bottom:0;width:34%;max-width:170px;background:#0d1730;border-radius:22px;padding:6px;box-shadow:0 24px 50px -20px rgba(0,0,0,.55)}
+.mp .phone .ps{background:var(--bg);border-radius:17px;padding:10px 8px;display:flex;flex-direction:column;gap:6px;min-height:200px}
+.mp .phone .ph-h{display:flex;align-items:center;gap:6px;font-size:.62rem;font-weight:600;color:var(--navy);padding-bottom:6px;border-bottom:1px solid var(--sand)}
+.mp .phone .ph-h span{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--navy));display:flex;align-items:center;justify-content:center}
+.mp .phone .ph-h svg{width:10px;height:10px}
+.mp .phone .m{font-size:.56rem;line-height:1.35;padding:6px 8px;border-radius:10px;max-width:88%}
+.mp .phone .me{align-self:flex-end;background:var(--navy);color:#fff}
+.mp .phone .bot{align-self:flex-start;background:#fff;border:1px solid var(--sand);color:var(--ink)}
+.mp .illu{font-size:.76rem;color:var(--slate);margin-top:10px}
+
+/* Payment panel */
+.mp .panel{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh);padding:clamp(20px,3.4vw,30px);border:1px solid var(--sand)}
+.mp .panel h2{font-size:1.6rem;margin-bottom:.2em}
+.mp .anchor{font-size:.9rem;color:var(--slate);margin:0 0 14px}
+.mp .pblock{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--sand);border-radius:var(--r-sm);padding:10px 14px;margin:8px 0 18px;font-size:.86rem;color:var(--slate)}
+.mp .pb-l b{color:var(--navy)}
+.mp .pb-r{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex:none}
+.mp .pb-r s{font:600 1.15rem/1 'Cormorant Garamond',serif;font-variant-numeric:lining-nums;color:var(--slate);white-space:nowrap}
+.mp .pb-r em{font:700 .7rem 'Inter',sans-serif;font-style:normal;letter-spacing:.04em;color:#fff;background:var(--rose-d);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.mp .mini-q{display:flex;gap:12px;align-items:center;margin:16px 0 4px;padding:12px 14px;border-radius:var(--r-sm);background:var(--cream)}
+.mp .mini-q img{width:48px;height:48px;border-radius:12px;object-fit:cover;object-position:50% 50%;flex:none}
+.mp .mini-q blockquote{margin:0}
+.mp .mini-q p{margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.08rem;line-height:1.3;color:var(--navy)}
+.mp .mini-q cite{display:block;font-style:normal;font-size:.78rem;color:var(--slate);margin-top:3px}
+.mp .bonus{display:flex;gap:12px;align-items:center;background:var(--gold-xl);border:1px dashed var(--gold);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:16px;color:var(--navy-d);font-size:.92rem}
+.mp .bonus svg{width:26px;height:26px;color:var(--gold-d);flex:none}
+.mp .opts{display:grid;gap:12px;margin:4px 0 16px}
+.mp .opt{position:relative;display:flex;align-items:center;gap:14px;border:2px solid var(--sand);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .2s,background .2s}
+.mp .opt input{position:absolute;opacity:0;pointer-events:none}
+.mp .opt .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--sand);flex:none;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
+.mp .opt .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold);transform:scale(0);transition:transform .2s var(--ease)}
+.mp .opt:has(input:checked){border-color:var(--gold);background:var(--gold-xl)}
+.mp .opt:has(input:checked) .dot{border-color:var(--gold)}
+.mp .opt:has(input:checked) .dot::after{transform:scale(1)}
+.mp .opt:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:3px}
+.mp .opt .lbl{flex:1;min-width:0}
+.mp .opt .lbl b{display:block;color:var(--navy)}
+.mp .opt .lbl small{color:var(--slate);font-size:.82rem}
+.mp .opt .pr{text-align:right;white-space:nowrap}
+.mp .opt .pr b{display:block;font:700 1.55rem/1 'Cormorant Garamond',serif;color:var(--navy);font-variant-numeric:lining-nums}
+.mp .opt .pr small{font-size:.76rem;color:var(--slate)}
+.mp .opt .tag{position:absolute;top:-11px;right:14px;background:var(--navy);color:#fff;font:600 .66rem 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.mp .pay-main{width:100%;min-height:60px;font-size:1.08rem}
+@media(max-width:520px){.mp .pay-main{font-size:1rem;padding:16px 18px;gap:10px}.mp .kbox-h{font-size:.95rem}.mp .marks{gap:5px}.mp .marks .lock{flex-basis:100%;justify-content:center}}
+.mp .alt-pay{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+.mp .alt-pay a{min-height:50px;font-size:.95rem}
+.mp .vipps{background:#ff5b24;box-shadow:none}.mp .vipps:hover{background:#e04a17}
+.mp .klarna{background:#ffb3c7;color:#17120f;box-shadow:none}.mp .klarna:hover{background:#ff9fb8;color:#17120f}
+.mp .marks{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:14px}
+.mp .marks span{font:700 .68rem 'Inter',sans-serif;letter-spacing:.04em;padding:5px 9px;border-radius:6px;border:1px solid var(--sand);color:var(--navy);background:#fff}
+.mp .marks .v{background:#ff5b24;border-color:#ff5b24;color:#fff}
+.mp .marks .k{background:#ffb3c7;border-color:#ffb3c7;color:#17120f}
+.mp .marks .lock{display:inline-flex;align-items:center;gap:5px;border:0;background:none;color:var(--slate);font-weight:500}
+.mp .marks .lock svg{width:14px;height:14px;color:var(--gold)}
+.mp .assure{display:grid;gap:8px;margin:16px 0 0;padding:0;list-style:none;font-size:.88rem;color:var(--ink)}
+.mp .assure li{display:flex;gap:10px;align-items:flex-start}
+.mp .assure svg{width:18px;height:18px;flex:none;color:#2f6b45;margin-top:2px}
+.mp .ask{margin:14px 0 0;font-size:.88rem;color:var(--slate);text-align:center}
+.mp .ask a{color:var(--gold-d);font-weight:600}
+.mp .qa{margin-top:16px;border-top:1px solid var(--sand)}
+.mp .qa details{border:0;border-bottom:1px solid var(--sand);border-radius:0;margin:0;background:none}
+.mp .qa summary{padding:14px 40px 14px 0;font-size:.92rem}
+.mp .qa summary::after{right:0;width:24px;height:24px;margin-top:-12px}
+.mp .qa details p{padding:0 0 14px;font-size:.9rem}
+
+/* Stories under the fold */
+.mp .three{display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.mp .three{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mp .st{background:#fff;border-radius:var(--r-lg);border:1px solid var(--sand);border-top:4px solid var(--gold);padding:28px 26px 24px;display:flex;flex-direction:column;box-shadow:var(--sh-sm)}
+.mp .st h3{font-size:1.45rem;line-height:1.25;margin-bottom:.6em}
+.mp .st p{color:var(--slate);font-size:.95rem;margin-bottom:20px}
+.mp .st .who{margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--sand)}
+.mp .st .who img{width:48px;height:48px;border-radius:12px;object-fit:cover;flex:none}
+.mp .st .who b{display:block;color:var(--navy);font-size:.95rem}
+.mp .st .who small{color:var(--slate);font-size:.82rem}
+
+/* Value + anchor */
+/* Wall */
+.mp .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:28px 0 24px}
+.mp .tab{border:1.5px solid var(--sand);background:#fff;color:var(--navy);border-radius:999px;padding:10px 18px;font:500 .92rem 'Inter',sans-serif;cursor:pointer;min-height:44px;transition:background .2s,border-color .2s,color .2s}
+.mp .tab:hover{border-color:var(--gold)}
+.mp .tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.mp .wall{columns:1;column-gap:18px}
+@media(min-width:720px){.mp .wall{columns:2}}
+@media(min-width:1040px){.mp .wall{columns:3}}
+.mp .wall .q-card .theme{display:inline-block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);font-weight:600;margin-left:8px}
+.mp .wall:not(.all) .q-card.extra{display:none}
+.mp .more{display:flex;justify-content:center;margin-top:8px}
+
+.mp .sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--sand);box-shadow:0 -10px 30px -18px rgba(26,45,80,.4);padding:10px 16px;display:none;align-items:center;gap:12px}
+.mp .sticky .sp{flex:1;line-height:1.2;min-width:0}
+.mp .sticky .sp b{display:block;font:700 1.25rem 'Cormorant Garamond',serif;color:var(--navy);font-variant-numeric:lining-nums}
+.mp .sticky .sp small{font-size:.78rem;color:var(--slate)}
+.mp .sticky .btn{min-height:50px;padding:12px 20px;font-size:.95rem}
+@media(max-width:979px){.mp .sticky.on{display:flex}}
+@media(max-width:520px){.mp .visual{padding-right:28px}.mp .cmp{grid-template-columns:1fr}}
+.mp .bar.pinned{position:fixed;top:0;left:0;right:0}
+/* Klarna box */
+.mp .kbox{margin:14px 0 0;padding:16px 16px 14px;border-radius:var(--r-sm);background:#fff6f9;border:1px solid #ffc9d7}
+.mp .kbox-h{display:flex;align-items:center;gap:10px;margin:0 0 10px;color:var(--navy);font-weight:600;font-size:1rem}
+.mp .kmark{background:#ffb3c7;color:#17120f;font-weight:800;font-size:.8rem;padding:3px 9px;border-radius:6px}
+.mp .kbox ol{margin:0 0 14px;padding-left:20px;color:var(--slate);font-size:.9rem;line-height:1.5}
+.mp .kbox li{margin:0 0 4px}
+.mp .kbox .btn{width:100%;min-height:50px}
+</style>
+
+<div class="mp" id="mp">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="m-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="m-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".18"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="m-tick" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="m-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
+    <symbol id="m-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="m-gift" viewBox="0 0 24 24"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="m-shield-unused" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="m-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="m-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="m-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="m-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 10l6-3v10l-6-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="m-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM19 10v1a7 7 0 0 1-14 0v-1M12 18v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="m-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="m-spark2" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="m-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <div class="bar js-webinar" id="mp-bar"><span class="pulse" aria-hidden="true"></span><strong data-p2="Webinarprisen gjelder i">Bonusene forsvinner om</strong> <span class="t js-t"><span>--</span>:<span>--</span>:<span>--</span>:<span>--</span></span> <a href="#bonus" class="js-bonus bar-link">Se bonusene</a></div>
+  <div class="logo"><img src="https://haphuongharley-wq.github.io/maren-kajabi-pages/kajabi/img/checkout/1254033d2deb.png" alt="Det lille pusterommet, Maren Kvalvaag-Toven" width="72" height="72"></div>
+
+  <!-- Above the fold -->
+  <section class="fold" id="betal">
+    <div class="wrap fold-grid">
+      <div class="pitch">
+        <span class="eyebrow">Et nytt kapittel begynner her</span>
+        <h1>Nå er det <em>din tur.</em></h1>
+        <p class="lead"><strong style="color:var(--navy)">Fra stress til ro, skreddersydd for deg.</strong> 12 uker der du finner din vei til ro, med støtte hele veien.</p>
+      </div>
+      <div class="pitch-more">
+        <ul class="outcomes">
+          <li><svg><use href="#m-check"/></svg><span>Forstå hvorfor du havner ved veggen, med Enneagrammet som kart over <em>dine</em> mønstre</span></li>
+          <li><svg><use href="#m-check"/></svg><span>Konkrete verktøy for hvile, grenser og selvfølelse som du bruker i hverdagen</span></li>
+          <li><svg><use href="#m-check"/></svg><span>Aldri alene: gruppecoaching med Maren hver måned, fellesskap og Ennea døgnet rundt</span></li>
+        </ul>
+        <span class="rating"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span>Maren har hjulpet over 6 400 kvinner</span>
+      </div>
+
+      <div class="panel" id="mp-panel">
+        <a class="bonus js-bonus" id="mp-bonus" href="#bonus"><svg><use href="#m-gift"/></svg><span><strong>2 bonuser inkludert</strong>, kun for deg som kjøper <span class="js-sun" data-sun="i dag" data-other="før søndag kl. 23.59">før søndag kl. 23.59</span></span><span class="go">Se →</span></a>
+        <h2>Velg hvordan du vil betale</h2>
+        <div class="pblock js-webinar">
+          <span class="pb-l"><b>Webinarpris</b>, kun til onsdag kl. 23.59</span>
+          <span class="pb-r"><s>14 990 kr</s><em>Spar 4 993 kr</em></span>
+        </div>
+        <div class="opts" role="radiogroup" aria-label="Betalingsvalg" id="mp-opts"></div>
+        <a class="btn pay-main" id="mp-pay" href="#">Ja, jeg vil starte reisen min <svg><use href="#m-arrow"/></svg></a>
+        <div class="kbox"><p class="kbox-h"><span class="kmark">Klarna</span>Betal senere eller del opp</p><ol><li>Trykk på «Betal med Klarna».</li><li>Velg i Klarna om du vil betale senere eller dele opp.</li><li>Bekreft betalingen, så får du tilgangen på e-post.</li></ol><a class="btn klarna" id="mp-klarna" href="#">Betal med Klarna</a></div>
+        <div class="alt-pay" id="mp-alt"><a class="btn vipps" id="mp-vipps" href="#">Betal med Vipps</a></div>
+        <div class="marks" aria-label="Betalingsmåter"><span class="lock"><svg><use href="#m-lock"/></svg>Trygg betaling</span><span class="v">Vipps</span><span class="k">Klarna</span><span>VISA</span><span>Mastercard</span></div>
+        <figure class="mini-q"><img src="https://haphuongharley-wq.github.io/maren-kajabi-pages/kajabi/img/checkout/68cbd141e388.jpg" alt="" width="44" height="44" loading="lazy"><blockquote><p>«Sakte, men sikkert begynner jeg å glede meg til jobb igjen.»</p><cite>Anne Schei, deltaker i Fra stress til ro</cite></blockquote></figure>
+        <ul class="assure">
+          <li><svg><use href="#m-tick"/></svg><span>Tilgang og Enneagram-testen kommer på e-post rett etter betaling</span></li>
+          <li><svg><use href="#m-tick"/></svg><span>Gå i ditt eget tempo, opptak av alle livesendinger</span></li>
+        </ul>
+        <div class="qa">
+          <details><summary>Når kan jeg starte?</summary><p>Med en gang. Du får tilgang rett etter betaling, og går i ditt eget tempo.</p></details>
+          <details><summary>Kan jeg dele opp betalingen?</summary><p>Ja. Velg delbetaling over, så fordeler du beløpet på 3 månedlige betalinger. Du kan også betale med Vipps eller Klarna.</p></details>
+          <details><summary>Får jeg personlig oppfølging?</summary><p>Ja, i den månedlige gruppecoachingen på Zoom, der du kan stille meg spørsmål direkte. Mellom samlingene har du fellesskapet og Ennea.</p></details>
+        </div>
+        <p class="ask">Andre spørsmål? <a href="https://m.me/maren.kvalvaag">Send meg en melding på Messenger →</a></p>
+      </div>
+
+      <div class="visual" aria-hidden="true">
+        <div class="laptop"><div class="scr">
+          <div class="side"><b>Fra stress til ro</b><div>Uke 1 · Grunnmuren</div><div>Uke 2 · Stress</div><div class="on">Uke 3 · Kropp og ro</div><div>Uke 4 · Hvile</div><div>Uke 5 · Verktøy</div><div>Uke 6 · Selvfølelse</div><div>Uke 7 · Identitet</div><div>Uke 8 · Mønstre og grenser</div><div>Uke 9 · Din type</div><div>Uke 10 · Din type</div><div>Uke 11 · Implementering</div><div>Uke 12 · Avslutning</div></div>
+          <div class="main"><div class="vid"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div><div class="ttl">Uke 3 · Lytt til kroppens signaler</div><div class="prog"><i></i></div></div>
+        </div><div class="base"></div></div>
+        <div class="phone"><div class="ps">
+          <div class="ph-h"><span><svg><use href="#m-spark"/></svg></span>Ennea</div>
+          <div class="m me">Jeg får ikke sove i kveld …</div>
+          <div class="m bot">La oss prøve SOS-øvelsen fra uke 5 sammen. Den tar tre minutter.</div>
+        </div></div>
+        <p class="illu">Illustrasjon av kurset og Ennea</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bonuses until Sunday 15 Nov 23:59 + urgency -->
+  <section class="bonus-sec" id="bonus">
+    <div class="wrap">
+      <div class="narrow center rv">
+        <span class="live-tag"><span class="pulse" aria-hidden="true"></span><span class="js-sun" data-sun="Kun i dag, til kl. 23.59" data-other="Kun til søndag kl. 23.59">Kun til søndag kl. 23.59</span></span>
+        <h2>To bonuser, <em>bare til nedtellingen er over</em></h2>
+        <p class="lead">Melder du deg på <span class="js-sun" data-sun="i dag" data-other="før søndag kl. 23.59">før søndag kl. 23.59</span>, får du to av mine digitale kurs i tillegg. En liten takk for at du velger deg selv nå.</p>
+        <div class="big-cd"><span class="cd js-cd" aria-label="Tid igjen"><span><b>--</b><small>dager</small></span><span><b>--</b><small>timer</small></span><span><b>--</b><small>min</small></span><span><b>--</b><small>sek</small></span></span></div>
+      </div>
+      <div class="bgrid">
+        <article class="bcard rv"><span class="bn">Bonus 1</span><h3>Minikurs i meditasjon</h3><p>Korte, guidede meditasjoner du kan bruke midt i hverdagen.</p><span class="bv">Verdi: 299 kr</span></article>
+        <article class="bcard rv"><span class="bn">Bonus 2</span><h3>Morgenstrekk med Pia</h3><p>Rolige strekkøvelser for en myk start på dagen.</p><span class="bv">Verdi: 499 kr</span></article>
+      </div>
+      <p class="after-note rv"><span class="js-sun" data-sun="Etter kl. 23.59 i kveld forsvinner bonusene." data-other="Etter søndag kl. 23.59 forsvinner bonusene.">Etter søndag kl. 23.59 forsvinner bonusene.</span><span class="js-webinar"> Webinarprisen 9 997 kr gjelder til onsdag kl. 23.59.</span></p>
+      <div class="center"><a class="btn" href="#betal">Sikre meg bonusene nå <svg><use href="#m-arrow"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- Three strongest stories -->
+  <section class="white">
+    <div class="wrap">
+      <div class="narrow center rv"><span class="eyebrow">Ekte historier</span><h2>Kvinner som har gått <em>Fra stress til ro</em></h2></div>
+      <div class="three" style="margin-top:32px">
+        <article class="st rv"><h3>«Sakte, men sikkert begynner jeg å glede meg til jobb igjen.»</h3><p>«Jeg var så utbrent at jeg trodde jeg var alvorlig syk. (…) Enneagrammet hjalp meg å se mønstrene mine: ja-mennesket, de store kravene til meg selv, frykten for ikke å gjøre nok.»</p><div class="who"><img src="https://haphuongharley-wq.github.io/maren-kajabi-pages/kajabi/img/checkout/68cbd141e388.jpg" alt="" width="96" height="96" loading="lazy"><span><b>Anne Schei</b><small>Deltaker i Fra stress til ro</small></span></div></article>
+        <article class="st rv"><h3>«Det har vært en utrolig verdifull reise!»</h3><p>«Etter å ha vært utbrent og sykemeldt i over ett år, ønsket jeg å forstå hvorfor det skjedde. (…) Jeg har fått hjelp til å forstå at det å sette grenser og prioritere meg selv ikke er egoisme.»</p><div class="who"><img src="https://haphuongharley-wq.github.io/maren-kajabi-pages/kajabi/img/checkout/3afaffd1ee64.jpg" alt="" width="96" height="96" loading="lazy" style="object-position:50% 30%"><span><b>Audhild Helgaas</b><small>Psyk. sykepleier og traumeterapeut</small></span></div></article>
+        <article class="st rv"><h3>«…men det er SÅ verdt det.»</h3><p>«Jeg satte alltid alle andre og deres behov foran meg selv. (…) Jeg kjenner ikke like mye på dårlig samvittighet når jeg vet at jeg må sette meg selv først.»</p><div class="who"><img src="https://haphuongharley-wq.github.io/maren-kajabi-pages/kajabi/img/checkout/459c7ac18916.jpg" alt="" width="96" height="96" loading="lazy" style="object-position:50% 30%"><span><b>Cecilie Liland</b><small>Deltaker i Fra stress til ro</small></span></div></article>
+      </div>
+      <p class="disc" style="margin-top:18px">Fra deltakere i Fra stress til ro.</p>
+
+    </div>
+  </section>
+
+  <!-- Value stack -->
+  <section class="cream">
+    <div class="wrap">
+      <div class="narrow center rv"><span class="eyebrow">Alt inkludert</span><h2>Dette får du i <em>Fra stress til ro</em></h2></div>
+      <div class="receipt rv">
+        <ul class="rows">
+          <li><span class="ri"><svg><use href="#m-book"/></svg></span><span class="rt"><b>12 ukers kurs med videoleksjoner, arbeidsbok og øvelser</b><small>En strukturert reise fra stress til varig indre ro.</small></span><span class="rv2">9 900 kr</span></li>
+          <li><span class="ri"><svg><use href="#m-compass"/></svg></span><span class="rt"><b>Enneagram-test med personlig rapport</b><small>Kartet over dine egne mønstre.</small></span><span class="rv2">500 kr</span></li>
+          <li><span class="ri"><svg><use href="#m-video"/></svg></span><span class="rt"><b>Typetilpassede videoer om stress, grenser og coaching</b><small>Tilpasset Enneagram-typen din.</small></span><span class="rv2">2 000 kr</span></li>
+          <li><span class="ri"><svg><use href="#m-chart"/></svg></span><span class="rt"><b>Kartlegging før og etter</b><small>Se din egen fremgang fra dag 1 til dag 90.</small></span><span class="rv2">Inkludert</span></li>
+          <li><span class="ri"><svg><use href="#m-video"/></svg></span><span class="rt"><b>3 gruppecoachinger med Maren på Zoom</b><small>Still spørsmål og få veiledning.</small></span><span class="rv2">5 000 kr</span></li>
+          <li><span class="ri"><svg><use href="#m-mic"/></svg></span><span class="rt"><b>3 direktesendinger med tema og guidet meditasjon</b><small>Med opptak hvis du ikke kan være med.</small></span><span class="rv2">5 000 kr</span></li>
+          <li><span class="ri"><svg><use href="#m-users"/></svg></span><span class="rt"><b>Fellesskap med de andre deltakerne i 3 måneder</b><small>Du er aldri alene på reisen.</small></span><span class="rv2">1 500 kr</span></li>
+          <li><span class="ri"><svg><use href="#m-spark2"/></svg></span><span class="rt"><b>Ennea, din AI-guide døgnet rundt i 3 måneder</b><small>Svar og støtte mellom samlingene.</small></span><span class="rv2">1 500 kr</span></li>
+          <li class="is-bonus"><span class="ri"><svg><use href="#m-gift"/></svg></span><span class="rt"><b><em class="lb">Bonus</em>Minikurs i meditasjon</b><small><span class="js-sun" data-sun="Kun i dag" data-other="Kun til søndag kl. 23.59">Kun til søndag kl. 23.59</span></small></span><span class="rv2">299 kr</span></li>
+          <li class="is-bonus"><span class="ri"><svg><use href="#m-gift"/></svg></span><span class="rt"><b><em class="lb">Bonus</em>Morgenstrekk med Pia</b><small><span class="js-sun" data-sun="Kun i dag" data-other="Kun til søndag kl. 23.59">Kun til søndag kl. 23.59</span></small></span><span class="rv2">499 kr</span></li>
+        </ul>
+        <div class="tot">
+          <div class="tl"><span>Total verdi</span><s data-p2="25 400 kr">26 198 kr</s></div>
+          <div class="tl ref js-webinar"><span>Pris fra torsdag</span><span>14 990 kr</span></div>
+          <div class="tl now"><span>Din pris i dag</span><b data-p3="14 990 kr">9 997 kr</b><small class="js-split" data-p3="eller 3 × 5 247 kr (totalt 15 741 kr)">eller 3 × 3 497 kr (totalt 10 491 kr)</small></div>
+        </div>
+        <a class="btn pay-main" href="#betal">Ja, jeg vil starte reisen min <svg><use href="#m-arrow"/></svg></a>
+        <p class="rnote js-webinar"><span class="pulse" aria-hidden="true"></span><span data-p2="Webinarprisen gjelder til onsdag kl. 23.59."><span class="js-sun" data-sun="Bonusene gjelder bare ut dagen i dag." data-other="Bonusene gjelder bare til søndag kl. 23.59.">Bonusene gjelder bare til søndag kl. 23.59.</span></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial wall (6 shown, rest on demand) -->
+  <section class="white">
+    <div class="wrap">
+      <div class="narrow center rv"><span class="eyebrow">Med deres egne ord</span><h2>Små og store endringer</h2><p class="lead">Velg et tema og les historiene.</p></div>
+      <div class="tabs" role="tablist" aria-label="Velg tema">
+        <button type="button" class="tab" role="tab" aria-selected="true" data-f="alle">Alle</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-f="stress">Stress &amp; søvn</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-f="grenser">Grenser &amp; selvfølelse</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-f="energi">Energi &amp; overskudd</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-f="seg-selv">Finne tilbake til seg selv</button>
+      </div>
+      <div class="wall" id="mp-wall" aria-live="polite">
+        <figure class="q-card" data-t="grenser"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Grenser &amp; selvfølelse</span><p>«Jeg har blitt mer bevisst på egne behov, viktigheten av å sette grenser og at hvile faktisk har en verdi i seg selv. Jeg trenger ikke alltid å prestere eller være effektiv. <strong>I dag kjenner jeg på mer ro og tilstedeværelse.</strong> (…) Ennea er også et kjempe fint hjelpemiddel!»</p><figcaption>Therese</figcaption></figure>
+        <figure class="q-card" data-t="stress"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Stress &amp; søvn</span><p>«Jeg har stått i denne situasjonen i snart 3 år, opp og ned har det gått, og prøvd forskjellig hjelp. Så var skeptisk til å prøve «enda» ett kurs. Men, Maren har gitt meg veldig gode og konkrete råd. <strong>Enneagrammet har fått meg til å forstå hvorfor jeg gjør de samme «feilene» gang på gang.</strong> Har hatt stor hjelp av å forstå og prioritere meg selv med jevnlig meditasjon og hva pusten betyr. Gleder meg til veien videre.»</p><figcaption>Lillian Lund</figcaption></figure>
+        <figure class="q-card" data-t="stress"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Stress &amp; søvn</span><p>«Jeg var veldig stresset, hadde tankekjør og sov dårlig, og var 100% sykmeldt. <strong>I dag har jeg det så mye bedre.</strong> Jeg sover mye bedre, har mindre tankekjør, er gladere, og er delvis tilbake i jobb igjen.»</p><figcaption>Elisabeth</figcaption></figure>
+        <figure class="q-card" data-t="stress"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Stress &amp; søvn</span><p>«Jeg var utbrent for tredje gang, med lite energi, hjertebank og tankekjør, og en kropp som var helt utkjørt. Etter arbeidet med Maren <strong>fant jeg mer ro, trygghet og overskuddet tilbake</strong>, jeg kan anbefale dette til alle som sliter med utbrenthet.»</p><figcaption>Anonym</figcaption></figure>
+        <figure class="q-card" data-t="seg-selv"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Finne tilbake til seg selv</span><p>«Jeg er så glad for at jeg fant Maren. Jeg håndterer stressende situasjoner helt annerledes nå, både hjemme og på jobb. Jeg er mer til stede, det føles fantastisk. <strong>Jeg er tilbake i førersetet i mitt eget liv.</strong> Tusen takk, Maren!»</p><figcaption>Maria</figcaption></figure>
+        <figure class="q-card" data-t="grenser"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Grenser &amp; selvfølelse</span><p>«Jeg var sårbar, utbrent og i konstant alarmberedskap. Maren viste meg Enneagrammet, og jeg forstår endelig hvorfor jeg reagerte som jeg gjorde. <strong>Nå klarer jeg å sette grenser og skape mer ro i hverdagen min.</strong>»</p><figcaption>Katrin</figcaption></figure>
+        <figure class="q-card" data-t="energi"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Energi &amp; overskudd</span><p>«Maren ga meg først noen enkle verktøy som ga meg mer energi og overskudd, og deretter innsikt til å forstå min egen situasjon. <strong>Kombinasjonen av enkle verktøy og dypere innsikt ble nøkkelen for meg.</strong>»</p><figcaption>Camilla</figcaption></figure>
+        <figure class="q-card" data-t="stress"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Stress &amp; søvn</span><p>«Jeg har en mye større indre ro enn jeg hadde for noen måneder siden, og stresstoleransen min har blitt bedre. Endelig kan jeg ta meg selv og mine egne behov på alvor. <strong>Dette har vært en investering for livet!</strong>»</p><figcaption>Synnøve</figcaption></figure>
+        <figure class="q-card" data-t="seg-selv"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Finne tilbake til seg selv</span><p>«Jeg hadde aldri hørt om Enneagrammet før jeg begynte å jobbe med Maren, men det åpnet en helt ny verden for meg. Sammen avdekket vi mønstrene jeg hadde levd etter, <strong>de som begrenset meg og tappet meg for energi i årevis</strong>. Maren ga meg verktøy jeg vil bære med meg resten av livet.»</p><figcaption>Katrine</figcaption></figure>
+        <figure class="q-card" data-t="grenser"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Grenser &amp; selvfølelse</span><p>«Selvbildet og selvtilliten min var lav, og jeg var sterkt dømmende til meg selv. Etter arbeidet med Maren merker jeg at det er mulig å snu på ting, <strong>jeg stresser mindre, både i jobb og familieliv.</strong>»</p><figcaption>Beate</figcaption></figure>
+        <figure class="q-card" data-t="energi"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Energi &amp; overskudd</span><p>«Jeg var utbrent i alle ender og hadde store smerter i kroppen. Ved hjelp fra Maren fikk jeg gode verktøy til bruk i prosessen og til veien videre i livet. <strong>Jeg har fått ro inni meg</strong>, og det kan jeg takke Maren for.»</p><figcaption>Lene Elisabeth</figcaption></figure>
+        <figure class="q-card" data-t="stress"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Stress &amp; søvn</span><p>«Jeg gikk fra å periodevis være utkjørt av stress, uro og tankekjør, til å møte fremtiden med en avslappet holdning, godt humør og tro på meg selv. <strong>Det har vært en total transformasjon.</strong>»</p><figcaption>Lilli Stenhaug</figcaption></figure>
+        <figure class="q-card" data-t="grenser"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Grenser &amp; selvfølelse</span><p>«Maren hjalp meg å forstå og akseptere situasjonen jeg er i, og til å kunne prioritere og velge meg selv. <strong>Jeg føler meg endelig mer som meg selv igjen.</strong>»</p><figcaption>Benedicte</figcaption></figure>
+        <figure class="q-card" data-t="seg-selv"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Finne tilbake til seg selv</span><p>«Sammen har vi tatt tak i det innerste inne, på en overraskende god og effektiv måte. <strong>Endelig ser jeg veien jeg skal gå</strong>, det er lysere, det er roligere, og jeg har en verktøykasse jeg kommer til å bruke videre.»</p><figcaption>Elin</figcaption></figure>
+        <figure class="q-card" data-t="energi"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Energi &amp; overskudd</span><p>«Når kroppen er utbrent og ikke hører etter, vet man ikke hvor man skal begynne. Men det har Maren hjulpet meg med, med <strong>gode råd underveis</strong> som jeg selv har fått jobbe videre med.»</p><figcaption>Marit</figcaption></figure>
+        <figure class="q-card" data-t="seg-selv"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Finne tilbake til seg selv</span><p>«Maren har hjulpet meg å se at jeg allerede har verktøyene jeg trenger for å skape den versjonen av meg selv jeg er ment å være nå. Jeg sitter igjen med <strong>en følelse av å komme hjem til meg selv.</strong>»</p><figcaption>Torunn Medaas Knudsen</figcaption></figure>
+        <figure class="q-card" data-t="seg-selv"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Finne tilbake til seg selv</span><p>72 år og helt utbrent på sofaen. Før spratt hun opp når noen kom inn i rommet, hun ville ikke bli tatt i å hvile. Etterpå kunne hun slappe av med god samvittighet. <strong>«For første gang i livet mitt kjenner jeg meg fri til å være meg.»</strong></p><figcaption>72 år</figcaption></figure>
+        <figure class="q-card" data-t="energi"><span class="stars" aria-label="5 av 5 stjerner"><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg><svg><use href="#m-star"/></svg></span><span class="theme">Energi &amp; overskudd</span><p>En skikkelig flink pike, sykemeldt, som ikke husket sist hun lo. Underveis begynte hun å ta andre valg, og lo mer med kollegene igjen. <strong>«Jeg kan gjøre det, og det går bra.»</strong></p><figcaption>Cathrine</figcaption></figure>
+      </div>
+      <div class="more"><button type="button" class="btn btn-ghost" id="mp-more">Vis flere historier</button></div>
+    </div>
+  </section>
+
+  <!-- Final CTA + urgency -->
+  <section class="dark final">
+    <div class="wrap narrow center rv">
+      <span class="eyebrow" data-p2="Siste sjanse for webinarprisen" data-p3="Finn din vei til ro">Siste sjanse for bonusene</span>
+      <h2>Det vil aldri kjennes som <em style="color:var(--gold-l)">det rette øyeblikket.</em></h2>
+      <p>Mønstrene du lever i nå har hatt år på å sette seg. De løser seg ikke av seg selv. Det eneste spørsmålet er om du vil at det skal fortsette å være slik.</p>
+      <div class="big-cd dark-cd js-webinar"><span class="cd js-cd" aria-label="Tid igjen"><span><b>--</b><small>dager</small></span><span><b>--</b><small>timer</small></span><span><b>--</b><small>min</small></span><span><b>--</b><small>sek</small></span></span></div>
+      <a class="btn" href="#betal">Ja, jeg vil starte reisen min <svg><use href="#m-arrow"/></svg></a>
+      <p class="ask" style="color:#c3cde0">Andre spørsmål? <a href="https://m.me/maren.kvalvaag" style="color:var(--gold-l)">Send meg en melding på Messenger →</a></p>
+    </div>
+  </section>
+
+  <div class="sticky" id="mp-sticky"><div class="sp"><b id="mp-sp-price"></b><small id="mp-sp-label"></small></div><a class="btn" href="#" id="mp-sp-pay">Bli med <svg><use href="#m-arrow"/></svg></a></div>
+</div>
+
+<script>
+(function(){
+  // ---- Payment links ----
+  var OFFER = {
+    // url: Kajabi offer checkout. vipps: Edpay Vipps link for the same plan; the Vipps button follows the chosen option.
+    // Webinar price, until priceDeadline
+    options: [
+      { id:'split', label:'Delbetaling',  price:'3 497 kr',  per:'per måned',    note:'3 betalinger · totalt 10 491 kr', tag:'Del opp på 3 måneder',
+        url:'https://www.detlillepusterommet.no/offers/ihoPo7vc/checkout', vipps:'https://app.edpay.no/offer/119/11396/vipps-mobilepay' },
+      { id:'full',  label:'Betal alt nå', price:'9 997 kr',  per:'engangsbeløp', note:'Spar 494 kr mot delbetaling',     tag:'Best verdi',
+        url:'https://www.detlillepusterommet.no/offers/t7QFrxQP/checkout', vipps:'https://app.edpay.no/offer/119/11394/vipps-mobilepay' }
+    ],
+    // Regular price, after priceDeadline. There are no separate offers yet, so these are the same links:
+    // the offers in Kajabi and Edpay must be repriced to 14 990 kr / 3 × 5 247 kr on Thu 19 Nov.
+    after: [
+      { id:'split', label:'Delbetaling',  price:'5 247 kr',  per:'per måned',    note:'3 betalinger · totalt 15 741 kr', tag:'Del opp på 3 måneder',
+        url:'https://www.detlillepusterommet.no/offers/ihoPo7vc/checkout', vipps:'https://app.edpay.no/offer/119/11396/vipps-mobilepay' },
+      { id:'full',  label:'Betal alt nå', price:'14 990 kr', per:'engangsbeløp', note:'Spar 751 kr mot delbetaling',     tag:'Best verdi',
+        url:'https://www.detlillepusterommet.no/offers/t7QFrxQP/checkout', vipps:'https://app.edpay.no/offer/119/11394/vipps-mobilepay' }
+    ],
+    selected: 'split',
+    // Klarna (Edpay, one payment; the buyer can pay later or split inside Klarna). The Klarna box always shows.
+    klarna:      'https://app.edpay.no/offer/119/11394/stripe-klarna',
+    klarnaAfter: 'https://app.edpay.no/offer/119/11394/stripe-klarna'   // same offer, see the note above
+  };
+
+  // Weekly evergreen cycle in Oslo time (the webinar runs every Sunday at 10:00; the page shows no dates):
+  //   Sunday            bonuses + webinar price, bonuses end Sunday 23:59
+  //   Monday-Wednesday  webinar price, ends Wednesday 23:59
+  //   Thursday-Saturday ordinary price
+  var WEEK = { bonusDay: 0, priceDay: 3 };   // days after Sunday: bonuses end Sunday, webinar price ends Wednesday
+  // Oslo wall time helpers: deadlines are written as Norwegian local time and converted with the
+  // real Oslo offset of that day, so summer/winter time changes never shift them.
+  function osloParts(t){
+    var o = {};
+    new Intl.DateTimeFormat('en-GB', {timeZone:'Europe/Oslo', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hourCycle:'h23'})
+      .formatToParts(new Date(t)).forEach(function(p){ o[p.type] = p.value; });
+    return o;
+  }
+  function osloOffset(t){ try { var o = osloParts(t); return Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour, +o.minute, +o.second) - Math.floor(t / 1000) * 1000; } catch (e) { return 3600000; } }
+  function oslo(str){   // 'YYYY-MM-DD HH:MM:SS' Oslo time -> epoch ms
+    var n = str.match(/\d+/g).map(Number), g = Date.UTC(n[0], n[1] - 1, n[2], n[3] || 0, n[4] || 0, n[5] || 0);
+    var t = g - osloOffset(g); return g - osloOffset(t);
+  }
+  function weekEnds(t){   // this cycle's bonus and price deadlines (epoch ms); the cycle starts Sunday 00:00 Oslo time
+    var o = osloParts(t), sun = +o.day - new Date(Date.UTC(+o.year, +o.month - 1, +o.day)).getUTCDay();
+    function end(d){ var x = new Date(Date.UTC(+o.year, +o.month - 1, sun + d)); return oslo(x.getUTCFullYear() + '-' + (x.getUTCMonth() + 1) + '-' + x.getUTCDate() + ' 23:59:59'); }
+    return { bonus: end(WEEK.bonusDay), price: end(WEEK.priceDay) };
+  }
+  function osloDay(t){ return Math.floor((t + osloOffset(t)) / 86400000); }
+  var q = location.search.match(/[?&]dato=([^&]+)/);   // ?dato=2026-11-17T12:00 previews any Oslo moment
+  var offset = q ? oslo(decodeURIComponent(q[1])) - Date.now() : 0;
+  var ends = weekEnds(Date.now() + offset), bEnd = ends.bonus, pEnd = ends.price;
+  function phaseAt(t){ return t < bEnd ? 1 : t < pEnd ? 2 : 3; }   // 1 bonuses + webinar price, 2 webinar price, 3 ordinary price
+  var phase = phaseAt(Date.now() + offset);
+  if (phase === 3) { OFFER.options = OFFER.after; OFFER.klarna = OFFER.klarnaAfter; }
+  // ?plan=full or ?plan=split (from the sales page buttons) preselects that option
+  var pl = location.search.match(/[?&]plan=(full|split)/);
+  if (pl) OFFER.selected = pl[1];
+  // Placeholder instalment prices are never preselected
+  if (OFFER.options.some(function(o){ return o.id === OFFER.selected && /\[/.test(o.price); })) OFFER.selected = 'full';
+
+  var root = document.getElementById('mp');
+  if (!root) return;
+  root.classList.add('js');
+  // Keep the countdown bar on screen: fixed once its slot scrolls out of view
+  (function(){
+    var bar = document.getElementById('mp-bar');
+    if (!bar) return;
+    var slot = document.createElement('div');
+    bar.parentNode.insertBefore(slot, bar);
+    slot.appendChild(bar);
+    function check(){
+      var off = slot.getBoundingClientRect().top < 0;
+      if (off === bar.classList.contains('pinned')) return;
+      slot.style.height = off ? bar.offsetHeight + 'px' : '';
+      bar.classList.toggle('pinned', off);
+    }
+    window.addEventListener('scroll', check, {passive:true});   // one rect read per scroll event, no rAF so it never stalls
+    check();
+  })();
+  function hide(sel){ root.querySelectorAll(sel).forEach(function(el){ el.hidden = true; el.style.display = 'none'; }); }
+  function applyPhase(p){
+    if (p >= 2) hide('.js-bonus,#bonus,.is-bonus');
+    if (p >= 3) hide('.js-webinar');
+    root.querySelectorAll('[data-p2],[data-p3]').forEach(function(el){
+      var v = p >= 3 && el.hasAttribute('data-p3') ? el.getAttribute('data-p3') : p >= 2 ? el.getAttribute('data-p2') : null;
+      if (v !== null) el.textContent = v;
+    });
+  }
+  // Bonus texts say «i dag» on the deadline day and «søndag» before it, never a date.
+  var shownDay = null;
+  function sunTexts(t){   // re-run when the Oslo date changes, so «søndag» turns into «i dag» at midnight
+    var d = osloDay(t);
+    if (d === shownDay) return;
+    shownDay = d;
+    var today = d === osloDay(bEnd);
+    root.querySelectorAll('.js-sun').forEach(function(el){ el.textContent = el.getAttribute(today ? 'data-sun' : 'data-other'); });
+  }
+  sunTexts(Date.now() + offset);
+  if (phase > 1) applyPhase(phase);
+  // Instalment texts still holding [X]/[Y] placeholders stay hidden
+  root.querySelectorAll('.js-split').forEach(function(el){ if (/\[/.test(el.textContent)) el.style.display = 'none'; });
+
+  var rv = root.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else rv.forEach(function(el){ el.classList.add('in'); });
+
+  // Payment options
+  var box = document.getElementById('mp-opts'), pay = document.getElementById('mp-pay'), spPay = document.getElementById('mp-sp-pay');
+  OFFER.options.forEach(function(o){
+    var l = document.createElement('label'); l.className = 'opt';
+    l.innerHTML = '<input type="radio" name="mp-plan" value="' + o.id + '"' + (o.id === OFFER.selected ? ' checked' : '') + '>' +
+      (o.tag ? '<span class="tag">' + o.tag + '</span>' : '') + '<span class="dot"></span>' +
+      '<span class="lbl"><b>' + o.label + '</b><small>' + o.note + '</small></span><span class="pr"><b>' + o.price + '</b><small>' + o.per + '</small></span>';
+    box.appendChild(l);
+  });
+  function sync(){
+    var id = (box.querySelector('input:checked') || {}).value, o = OFFER.options.filter(function(x){ return x.id === id; })[0] || OFFER.options[0];
+    pay.href = spPay.href = o.url || '#';
+    vipps.href = o.vipps || '#';
+    vipps.textContent = 'Betal med Vipps: ' + (o.id === 'split' ? '3 × ' + o.price : o.price);
+    document.getElementById('mp-sp-price').textContent = o.price + (o.id === 'split' ? '/mnd' : '');
+    document.getElementById('mp-sp-label').textContent = o.label;
+  }
+  var vipps = document.getElementById('mp-vipps');
+  box.addEventListener('change', sync); sync();
+  [pay, spPay, vipps].forEach(function(a){ a.addEventListener('click', function(e){ if (a.getAttribute('href') === '#'){ e.preventDefault(); alert('Forhåndsvisning: betalingslenken er ikke lagt inn ennå.'); } }); });
+  var k = document.getElementById('mp-klarna');
+  if (OFFER.klarna) k.href = OFFER.klarna;
+  else k.addEventListener('click', function(e){ e.preventDefault(); alert('Forhåndsvisning: Klarna-lenken er ikke lagt inn ennå.'); });
+
+
+  // Testimonial wall: first 6 visible, a theme filter shows all matches
+  var wall = document.getElementById('mp-wall'), cards = wall.querySelectorAll('.q-card'), more = document.getElementById('mp-more');
+  cards.forEach(function(c, i){ if (i >= 6) c.classList.add('extra'); });
+  more.addEventListener('click', function(){ wall.classList.add('all'); more.parentNode.hidden = true; });
+  var tabs = root.querySelectorAll('.tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.setAttribute('aria-selected', x === t); });
+      if (t.dataset.f !== 'alle') { wall.classList.add('all'); more.parentNode.hidden = true; }
+      cards.forEach(function(c){ c.hidden = t.dataset.f !== 'alle' && c.dataset.t !== t.dataset.f; });
+    });
+  });
+
+  // Sticky pay bar on mobile while the payment panel is out of view
+  var sticky = document.getElementById('mp-sticky'), panel = document.getElementById('mp-panel');
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ sticky.classList.toggle('on', !es[0].isIntersecting && window.scrollY > 300); }).observe(panel);
+
+  // Countdowns (top bar, bonus section, final CTA): to the bonus deadline, then to the price deadline.
+  var big = root.querySelectorAll('.js-cd'), small = root.querySelectorAll('.js-t');
+  (function tick(){
+    var t = Date.now() + offset, p = phaseAt(t);
+    if (p !== phase) { if (p === 3 && !q) { location.reload(); return; } phase = p; applyPhase(p); }   // a preview would reload into the same moment forever
+    if (phase === 3) return;
+    if (phase === 1) sunTexts(t);
+    var s = Math.max(0, Math.floor(((phase === 1 ? bEnd : pEnd) - t) / 1000));
+    var v = [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60].map(function(n){ return String(n).padStart(2, '0'); });
+    big.forEach(function(c){ c.querySelectorAll('b').forEach(function(b, i){ b.textContent = v[i]; }); });
+    small.forEach(function(c){ c.querySelectorAll('span').forEach(function(b, i){ b.textContent = v[i]; }); });
+    setTimeout(tick, 1000);
+  })();
+})();
+</script>
